@@ -19,7 +19,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
+        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\InteractiveCrosshair</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -34,18 +34,35 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Xml"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Program.cs"/>
+        <Compile Include="Harmony\NoCrosshair.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
+
     <ItemGroup>
-      <Content Include="ModInfo.xml" />
+        <Content Include="ModInfo.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="0Harmony">
+        <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Assembly-CSharp">
+        <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="LogLibrary">
+        <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="UnityEngine.CoreModule">
+        <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+    </ItemGroup>
+
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

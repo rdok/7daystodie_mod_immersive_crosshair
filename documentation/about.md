@@ -1,12 +1,12 @@
 # 7 Days to Die Mod - Immersive Crosshair
 
-[![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/5541)
+[![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/5601)
 [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7daystodie_mod_immersive_crosshair)
 
 > **Immersive Crosshair:** Crosshair when you need. Hide when you don't.  
 > **EAC Caveat:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
-[![Immersive Crosshairs Showcase](https://raw.githubusercontent.com/rdok/7daystodie_immersive_crosshair/main/documentation/showcase.webp)](https://www.nexusmods.com/7daystodie/mods/5541)
+[![Immersive Crosshairs Showcase](https://raw.githubusercontent.com/rdok/7daystodie_immersive_crosshair/main/documentation/showcase.webp)](https://www.nexusmods.com/7daystodie/mods/5601)
 
 - 7daystodie Version: 1.0 (b333)
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).

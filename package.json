@@ -1,0 +1,27 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rdok/7daystodie_mod_immersive_crosshair"
+  },
+  "author": "Rizart Dokollari",
+  "name": "7daystodie_mod_immersive_crosshair",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "7z-bin": "Nexus-Mods/7z-bin",
+    "dotenv": "^16.4.5",
+    "npm-check": "^6.0.1",
+    "prettier": "^3.3.3"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "update:dependencies": "npm-check -u",
+    "generate_readme": "node scripts/generate_readme.js",
+    "generate_readme:watch": "nodemon --watch documentation -e md scripts/generate_readme.js"
+  },
+  "engines": {
+    "node": "20"
+  }
+}

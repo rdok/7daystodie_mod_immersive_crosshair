@@ -7,10 +7,10 @@ const packageJsonPath = join(__dirname, "..", "package.json");
 const packageJsonRaw = readFileSync(packageJsonPath, "utf8");
 const packageJson = JSON.parse(packageJsonRaw);
 const version = packageJson.version;
-const artifact = `${process.env.NO_CROSSHAIR} ${version}.7z`;
-const srcDir = join(__dirname, "../NoCrosshair/bin/Release");
+const artifact = `${process.env.IMMERSIVE_CROSSHAIR} ${version}.7z`;
+const srcDir = join(__dirname, "../ImmersiveCrosshair/bin/Release");
 const distDir = join(__dirname, "..", "dist");
-const buildDir = join(distDir, process.env.NO_CROSSHAIR);
+const buildDir = join(distDir, process.env.IMMERSIVE_CROSSHAIR);
 
 try {
   unlinkSync(artifact);

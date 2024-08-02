@@ -40,8 +40,8 @@ namespace ImmersiveCrosshair.Harmony
             _logger.Info("ApplyPatch: Checking currently held item.");
             var holdingItem = entityPlayerLocal.inventory.holdingItemItemValue;
 
-            var holdingRangedWeapon =
-                holdingItem?.ItemClass?.Actions?.Any(action => action is ItemActionRanged) ?? false;
+            var holdingRangedWeapon = holdingItem?.ItemClass?.Actions?
+                .Any(action => action.IsRanged) ?? false;
 
             if (holdingRangedWeapon)
             {

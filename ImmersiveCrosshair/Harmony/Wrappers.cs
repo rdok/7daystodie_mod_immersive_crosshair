@@ -122,7 +122,10 @@ namespace ImmersiveCrosshair.Harmony
             _itemClass = itemClass;
         }
 
-        public IItemAction[] Actions => _itemClass.Actions?.Select(action => new ItemActionAdapter(action)).ToArray();
+        public IItemAction[] Actions => _itemClass
+            .Actions?
+            .Select(action => new ItemActionAdapter(action))
+            .ToArray();
     }
 
 
@@ -152,6 +155,6 @@ namespace ImmersiveCrosshair.Harmony
             _itemAction = itemAction;
         }
 
-        public bool IsRangedAction => _itemAction is ItemActionRanged;
+        bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
     }
 }

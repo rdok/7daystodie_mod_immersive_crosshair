@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ImmersiveCrosshair.Harmony;
 using Moq;
@@ -15,7 +16,7 @@ public static class Factory
         var hitInfo = new Mock<IWorldRayHitInfo>();
         var playerLocal = new Mock<IEntityPlayerLocal>();
         var inventory = new Mock<ImmersiveCrosshair.Harmony.IInventory>();
-        var itemClass = new Mock<IItemClass>();
+        var itemClassMock = new Mock<IItemClass>();
         var hit = new Mock<IHitInfoDetails>();
         var holdingItemItemValue = new Mock<IItemValue>();
         var logger = new Mock<ILogger>();
@@ -36,7 +37,7 @@ public static class Factory
             ? (float)parameters["hit.distanceSq"]
             : 1;
 
-        holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClass.Object);
+        holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
         inventory.Setup(p => p.holdingItemItemValue)
             .Returns(holdingItemItemValue.Object);
         playerUI.Setup(p => p.GetComponentInChildren<IGuiWdwInGameHUD>())
@@ -48,7 +49,8 @@ public static class Factory
         hitInfo.Setup(p => p.bHitValid).Returns(hasBHitValid);
         hitInfo.Setup(p => p.hit).Returns(hit.Object);
         hit.Setup(p => p.distanceSq).Returns(distanceSq);
-        itemClass.Setup(p => p.Actions)
+
+        itemClassMock.Setup(p => p.Actions)
             .Returns(holdingRangedWeapon ? [itemActionRanged.Object] : []);
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.SetLogger(logger.Object);

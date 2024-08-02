@@ -25,6 +25,7 @@ namespace ImmersiveCrosshair.Harmony
 
     public interface IItemAction
     {
+        bool IsRanged { get; }
     }
 
     public interface IItemClass
@@ -35,10 +36,6 @@ namespace ImmersiveCrosshair.Harmony
     public interface IHarmony
     {
         void PatchAll();
-    }
-
-    public interface IItemActionRanged : IItemAction
-    {
     }
 
     public interface IItemValue
@@ -54,5 +51,9 @@ namespace ImmersiveCrosshair.Harmony
     public interface IHitInfoDetails
     {
         float distanceSq { get; }
+    }
+
+    public interface IItemActionRanged: IItemAction
+    {
     }
 }

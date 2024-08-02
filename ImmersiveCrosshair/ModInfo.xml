@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xml>
-	<Name value="ImmersiveCrosshair"/>
-	<DisplayName value="Immersive Crosshair"/>
-	<Author value="Rizarttt"/>
-	<Description value="Show crosshair when you need it. Hide it when you do not."/>
-	<Website value="https://www.nexusmods.com/7daystodie/mods/5601"/>
-	<Version value="1.0.0"/>
+    <Name value="ImmersiveCrosshair"/>
+    <DisplayName value="Immersive Crosshair"/>
+    <Author value="Rizarttt"/>
+    <Description value="Show crosshair when you need it. Hide it when you do not."/>
+    <Website value="https://www.nexusmods.com/7daystodie/mods/5601"/>
+    <Version value="1.0.0"/>
 </xml>

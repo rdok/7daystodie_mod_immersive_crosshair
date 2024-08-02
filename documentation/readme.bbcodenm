@@ -23,3 +23,25 @@
 [*] [url=https://harmony.pardeike.net/articles/patching-postfix.html]Harmony Patching[/url]
 [*] [url=https://github.com/devlooped/moq]devlooped/moq[/url]
 [/list]
+[size=5]FAQs[/size]
+
+[b]Does the crosshair-hiding feature work with guns or other ranged weapons?[/b]
+
+No, the mod does not hide the crosshair for guns or any other ranged weapons.
+
+[b]When does the crosshair get hidden?[/b]
+
+The crosshair is hidden when using melee weapons or when you're not holding anything.
+
+[b]What is this mod about?[/b]
+
+This mod focuses on hiding the crosshair to provide a cleaner screen when using melee weapons or holding nothing.
+
+[b]Can I change the mod or use its code?[/b]
+
+Yes! The mod is open-source, so you can modify and share it. More modders mean more mods.
+
+[b]What if the crosshair doesn't hide as it should?[/b]
+
+If the crosshair still shows when it shouldn't, update to the latest version to fix any bugs.
+

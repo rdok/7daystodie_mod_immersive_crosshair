@@ -6,6 +6,7 @@ namespace ImmersiveCrosshair.Harmony
     public class LocalPlayerUIWrapper : ILocalPlayerUI
     {
         private readonly LocalPlayerUI _localPlayerUI;
+        private readonly ILogger _logger = new Logger();
 
         public LocalPlayerUIWrapper(LocalPlayerUI playerUI)
         {
@@ -15,34 +16,35 @@ namespace ImmersiveCrosshair.Harmony
 
         public T GetComponentInChildren<T>()
         {
-            Log.Out("Loading Patch: Requesting component of type " + typeof(T).Name);
+            _logger.Info("Loading Patch: Requesting component of type " + typeof(T).Name);
 
             if (typeof(T) != typeof(IGuiWdwInGameHUD))
             {
-                Log.Out("Loading Patch: Type is not IGuiWdwInGameHUD, proceeding with generic component retrieval.");
+                _logger.Info(
+                    "Loading Patch: Type is not IGuiWdwInGameHUD, proceeding with generic component retrieval.");
                 var component = _localPlayerUI.GetComponentInChildren<T>();
 
-                Log.Out(component == null
+                _logger.Info(component == null
                     ? "Loading Patch: Component of type " + typeof(T).Name + " not found."
                     : "Loading Patch: Component of type " + typeof(T).Name + " found.");
 
                 return component;
             }
 
-            Log.Out("Loading Patch: Type is IGuiWdwInGameHUD, attempting to retrieve NGuiWdwInGameHUD.");
+            _logger.Info("Loading Patch: Type is IGuiWdwInGameHUD, attempting to retrieve NGuiWdwInGameHUD.");
             var nGuiComponent = _localPlayerUI.GetComponentInChildren<NGuiWdwInGameHUD>();
 
-            Log.Out(nGuiComponent == null
+            _logger.Info(nGuiComponent == null
                 ? "Loading Patch: NGuiWdwInGameHUD component not found."
                 : "Loading Patch: NGuiWdwInGameHUD component found with type: " + nGuiComponent.GetType().Name);
 
             if (nGuiComponent != null)
             {
-                Log.Out("Loading Patch: Wrapping NGuiWdwInGameHUD with IGuiWdwInGameHUD interface.");
+                _logger.Info("Loading Patch: Wrapping NGuiWdwInGameHUD with IGuiWdwInGameHUD interface.");
                 return (T)(object)new GuiWdwInGameHUDWrapper(nGuiComponent);
             }
 
-            Log.Out("Loading Patch: Failed to wrap NGuiWdwInGameHUD. Returning null.");
+            _logger.Info("Loading Patch: Failed to wrap NGuiWdwInGameHUD. Returning null.");
             return default;
         }
     }

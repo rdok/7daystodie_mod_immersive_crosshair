@@ -1,12 +1,16 @@
-const { readFileSync, unlinkSync, rmSync, cpSync } = require("fs");
+const { readFileSync, unlinkSync, rmSync, cpSync, writeFileSync } = require("fs");
 const { join } = require("path");
 const { execSync } = require("child_process");
 require("dotenv").config();
 
-const packageJsonPath = join(__dirname, "..", "package.json");
-const packageJsonRaw = readFileSync(packageJsonPath, "utf8");
-const packageJson = JSON.parse(packageJsonRaw);
-const version = packageJson.version;
+const modInfoXmlPath = join(__dirname, "..", "ImmersiveCrosshair/ModInfo.xml");
+const modInfoXmlRaw = readFileSync(modInfoXmlPath, "utf8");
+const versionMatch = modInfoXmlRaw.match(/<Version value="([\d.]+)"/);
+if (!versionMatch) {
+  throw new Error("Version not found in ModInfo.xml");
+}
+const version = versionMatch[1];
+
 const artifact = `${process.env.IMMERSIVE_CROSSHAIR} ${version}.7z`;
 const srcDir = join(__dirname, "../ImmersiveCrosshair/bin/Release");
 const distDir = join(__dirname, "..", "dist");

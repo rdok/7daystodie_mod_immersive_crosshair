@@ -7,12 +7,7 @@
 > **Immersive Crosshair:** Crosshair when you need. Hide when you don't.  
 > **EAC Caveat:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
-[![Immersive Crosshairs Showcase](https://raw.githubusercontent.com/rdok/7daystodie_immersive_crosshair/main/documentation/showcase.gif)](https://www.nexusmods.com/7daystodie/mods/5601)
-
-<picture>
-  <source srcset="https://raw.githubusercontent.com/rdok/7daystodie_immersive_crosshair/main/documentation/showcase.gif" type="image/gif">
-  <img src="https://raw.githubusercontent.com/rdok/7daystodie_immersive_crosshair/main/documentation/showcase.web" alt="Description of the image">
-</picture>
+[![Immersive Crosshairs Showcase](https://github.com/rdok/7daystodie_mod_immersive_crosshair/blob/main/documentation/showcase.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5601)
 
 - 7daystodie Version: 1.0 (b333)
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).

@@ -5,7 +5,6 @@
   },
   "author": "Rizart Dokollari",
   "name": "7daystodie_mod_immersive_crosshair",
-  "version": "1.0.0",
   "license": "GPL-3.0",
   "devDependencies": {
     "7z-bin": "Nexus-Mods/7z-bin",

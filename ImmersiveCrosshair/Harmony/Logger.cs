@@ -4,7 +4,9 @@ namespace ImmersiveCrosshair.Harmony
     {
         public void Info(string message)
         {
+#if DEBUG
             Log.Out(message);
+#endif
         }
     }
 

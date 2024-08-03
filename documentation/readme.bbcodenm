@@ -18,6 +18,18 @@
 [*] Activates the crosshair only when close enough to interact with an object.
 [*] Preserves the default behavior for ranged weapons.
 [/list]
+[size=5]Recommended Mods[/size]
+[quote]
+These mods have been manually verified for compatibility, though my gameplay.
+[/quote]
+[list]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5640]Dot Crosshair[/url]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5601]Immersive Crosshair[/url]
+[*] [url=https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=17443&nmm=1&game_id=1059]Danzo No Crosshair 1.2.1[/url]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5528]No Compass[/url]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5525]No GPS[/url]
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5631]Quick Continue[/url] Recommended if you test lots of mods.
+[/list]
 [size=4]Sources[/size]
 [list]
 [*] [url=https://harmony.pardeike.net/articles/patching-postfix.html]Harmony Patching[/url]

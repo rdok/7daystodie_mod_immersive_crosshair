@@ -83,7 +83,6 @@ public class ImmersiveCrosshairInitTests
         {
             { "HasHud", true },
             { "holdingRanged", false },
-            { "holdingRepair", false },
             { "holdingHarvest", true },
             { "HitInfo", true },
             { "bHitValid", true },
@@ -96,7 +95,7 @@ public class ImmersiveCrosshairInitTests
     }
 
     [Test]
-    public void it_disables_crosshair_having_not_an_interactable_in_distance()
+    public void it_disables_crosshair_having_no_interactable_in_distance()
     {
         var (playerLocal, hud) = Factory.CreatePostfixFactory(new Dictionary<string, object>
         {
@@ -104,9 +103,8 @@ public class ImmersiveCrosshairInitTests
             { "HitInfo", true },
             { "bHitValid", true },
             { "holdingRanged", false },
-            { "holdingHarvest", false },
             { "holdingRepair", true },
-            { "hit.distanceSq", (float)5.3 },
+            { "hit.distanceSq", MinimumInteractableDistance + .1f },
         });
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
@@ -114,9 +112,8 @@ public class ImmersiveCrosshairInitTests
         hud.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
 
-
     [Test]
-    public void it_hides_the_crosshair_holding_a_non_harvest_and_non_repair_tool()
+    public void it_hides_the_crosshair_holding_a_non_interactable_item()
     {
         var (playerLocal, hud) = Factory.CreatePostfixFactory(new Dictionary<string, object>
         {
@@ -125,24 +122,23 @@ public class ImmersiveCrosshairInitTests
             { "bHitValid", true },
             { "holdingRanged", false },
             { "holdingHarvest", false },
-            { "holdingRepair", false }
+            { "holdingRepair", false },
+            { "holdingSalvage", false }
         });
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
 
         hud.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
-
+    
     [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_terrain_tool()
+    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_salvage_tool()
     {
         var (playerLocal, hud) = Factory.CreatePostfixFactory(new Dictionary<string, object>
         {
             { "HasHud", true },
             { "holdingRanged", false },
-            { "holdingRepair", false },
-            { "holdingHarvest", false },
-            { "holdingTerrain", true },
+            { "holdingSalvage", true },
             { "HitInfo", true },
             { "bHitValid", true },
             { "hit.distanceSq", MinimumInteractableDistance }

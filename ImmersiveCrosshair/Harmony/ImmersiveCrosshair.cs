@@ -51,7 +51,7 @@ namespace ImmersiveCrosshair.Harmony
             }
 
             var holdsInteractable = actions?.Any(
-                action => action.IsHarvest || action.IsRepair || action.IsTerrain
+                action => action.IsHarvest || action.IsRepair || action.IsSalvage
             ) ?? false;
 
             if (!holdsInteractable)

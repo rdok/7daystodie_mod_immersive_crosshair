@@ -27,8 +27,8 @@ namespace ImmersiveCrosshair.Harmony
     {
         bool IsRanged { get; }
         bool IsRepair { get; }
-        bool IsTerrain { get; }
         bool IsHarvest { get; }
+        bool IsSalvage { get; }
         object GetType();
         bool IsNull();
     }
@@ -66,11 +66,11 @@ namespace ImmersiveCrosshair.Harmony
     {
     }
 
-    public interface IItemActionTerrain : IItemAction
+    public interface IItemActionHarvest : IItemAction
     {
     }
-    
-    public interface IItemActionHarvest : IItemAction
+
+    public interface IItemActionSalvage : IItemAction
     {
     }
 }

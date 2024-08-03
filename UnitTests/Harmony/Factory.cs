@@ -44,21 +44,22 @@ public static class Factory
         var holdingRanged = parameters.ContainsKey("holdingRanged") && (bool)parameters["holdingRanged"];
         if (holdingRanged) actions.Add(itemActionRanged.Object);
 
+        var itemActionRepair = new Mock<IItemActionRepair>();
+        itemActionRepair.Setup(p => p.IsRepair).Returns(true);
+        var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
+        if (holdingRepair) actions.Add(itemActionRepair.Object);
+
         var itemActionHarvest = new Mock<IItemActionHarvest>();
         itemActionHarvest.Setup(p => p.IsHarvest).Returns(true);
         var holdingHarvest =
             parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
         if (holdingHarvest) actions.Add(itemActionHarvest.Object);
-
-        var itemActionRepair = new Mock<IItemActionRepair>();
-        itemActionRepair.Setup(p => p.IsRepair).Returns(true);
-        var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
-        if (holdingRepair) actions.Add(itemActionRepair.Object);
         
-        var itemActionTerrain = new Mock<IItemActionTerrain>();
-        itemActionTerrain.Setup(p => p.IsTerrain).Returns(true);
-        var holdingTerrain = parameters.ContainsKey("holdingTerrain") && (bool)parameters["holdingTerrain"];
-        if (holdingTerrain) actions.Add(itemActionTerrain.Object);
+        var itemActionSalvage = new Mock<IItemActionSalvage>();
+        itemActionSalvage.Setup(p => p.IsSalvage).Returns(true);
+        var holdingSalvage =
+            parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
+        if (holdingSalvage) actions.Add(itemActionSalvage.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
 

@@ -40,18 +40,25 @@ public static class Factory
         var actions = new List<IItemAction>();
 
         var itemActionRanged = new Mock<IItemActionRanged>();
-        var holdingRanged = parameters.ContainsKey("HoldingRanged") && (bool)parameters["HoldingRanged"];
+        itemActionRanged.Setup(p => p.IsHarvest).Returns(true);
+        var holdingRanged = parameters.ContainsKey("holdingRanged") && (bool)parameters["holdingRanged"];
         if (holdingRanged) actions.Add(itemActionRanged.Object);
 
-        var itemActionDynamicMelee = new Mock<IItemActionDynamicMelee>();
-        itemActionDynamicMelee.Setup(p => p.IsDynamicMelee).Returns(true);
-        var holdingDynamicMelee =
-            parameters.ContainsKey("HoldingDynamicMelee") && (bool)parameters["HoldingDynamicMelee"];
-        if (holdingDynamicMelee) actions.Add(itemActionDynamicMelee.Object);
+        var itemActionHarvest = new Mock<IItemActionHarvest>();
+        itemActionHarvest.Setup(p => p.IsHarvest).Returns(true);
+        var holdingHarvest =
+            parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
+        if (holdingHarvest) actions.Add(itemActionHarvest.Object);
 
         var itemActionRepair = new Mock<IItemActionRepair>();
-        var holdingRepair = parameters.ContainsKey("HoldingRepair") && (bool)parameters["HoldingRepair"];
+        itemActionRepair.Setup(p => p.IsRepair).Returns(true);
+        var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
         if (holdingRepair) actions.Add(itemActionRepair.Object);
+        
+        var itemActionTerrain = new Mock<IItemActionTerrain>();
+        itemActionTerrain.Setup(p => p.IsTerrain).Returns(true);
+        var holdingTerrain = parameters.ContainsKey("holdingTerrain") && (bool)parameters["holdingTerrain"];
+        if (holdingTerrain) actions.Add(itemActionTerrain.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
 

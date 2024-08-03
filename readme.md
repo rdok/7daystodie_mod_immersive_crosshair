@@ -17,7 +17,7 @@
 - Activates the crosshair only when close enough to interact with an object.
 - Preserves the default behavior for ranged weapons.
 #### v1.1.0
-- The crosshair activates only when near an object and holding a tool such as a shovel, hammer, or axe.
+- The crosshair activates when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
 - The crosshair is hidden when holding a melee weapon.
 
 ## Recommended Mods

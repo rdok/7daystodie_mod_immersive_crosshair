@@ -26,6 +26,10 @@ namespace ImmersiveCrosshair.Harmony
     public interface IItemAction
     {
         bool IsRanged { get; }
+        bool IsRepair { get; }
+        bool IsDynamicMelee { get; }
+        object GetType();
+        bool IsNull();
     }
 
     public interface IItemClass
@@ -53,7 +57,15 @@ namespace ImmersiveCrosshair.Harmony
         float distanceSq { get; }
     }
 
-    public interface IItemActionRanged: IItemAction
+    public interface IItemActionRanged : IItemAction
+    {
+    }
+
+    public interface IItemActionRepair : IItemAction
+    {
+    }
+
+    public interface IItemActionDynamicMelee : IItemAction
     {
     }
 }

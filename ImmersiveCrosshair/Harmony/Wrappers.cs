@@ -156,5 +156,17 @@ namespace ImmersiveCrosshair.Harmony
         }
 
         bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
+        bool IItemAction.IsRepair => _itemAction is ItemActionRepair;
+        bool IItemAction.IsDynamicMelee => _itemAction is ItemActionDynamicMelee;
+
+        public bool IsNull()
+        {
+            return _itemAction == null;
+        }
+
+        public new object GetType()
+        {
+            return _itemAction.GetType();
+        }
     }
 }

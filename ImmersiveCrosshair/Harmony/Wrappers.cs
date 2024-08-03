@@ -156,5 +156,38 @@ namespace ImmersiveCrosshair.Harmony
         }
 
         bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
+        bool IItemAction.IsRepair => _itemAction is ItemActionRepair;
+        bool IItemAction.IsTerrain => _itemAction is ItemActionTerrainTool;
+
+        public bool IsHarvest
+        {
+            get
+            {
+                if (_itemAction == null)
+                {
+                    Log.Out("IsHarvestingTool: ItemAction is null.");
+                    return false;
+                }
+
+                Log.Out($"IsHarvestingTool: Checking harvesting capabilities for {_itemAction.GetType().Name}.");
+
+                if (!_itemAction.bUseParticleHarvesting) return false;
+                
+                Log.Out("IsHarvestingTool: Item uses particle harvesting.");
+
+                return true;
+            }
+        }
+
+
+        public bool IsNull()
+        {
+            return _itemAction == null;
+        }
+
+        public new object GetType()
+        {
+            return _itemAction.GetType();
+        }
     }
 }

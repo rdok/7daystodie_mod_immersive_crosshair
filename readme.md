@@ -13,9 +13,12 @@
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Features
-
+#### v1.0.0
 - Activates the crosshair only when close enough to interact with an object.
 - Preserves the default behavior for ranged weapons.
+#### v1.1.0
+- The crosshair activates only when near an object and holding a tool such as a shovel, hammer, or axe.
+- The crosshair is hidden when holding a melee weapon.
 
 ## Recommended Mods
 > These mods have been manually verified for compatibility, though my gameplay.

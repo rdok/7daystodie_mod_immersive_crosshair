@@ -22,7 +22,7 @@ public class ImmersiveCrosshairInitTests
     }
 
     [Test]
-    public void it_enables_crosshair_holding_a_ranged_weapon()
+    public void it_disables_crosshair_holding_a_ranged_weapon()
     {
         var (playerLocalMock, hudMock) = Factory.CreatePostfixFactory(new Dictionary<string, object>
             {
@@ -37,7 +37,7 @@ public class ImmersiveCrosshairInitTests
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
 
-        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
+        hudMock.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
 
     [Test]
@@ -139,6 +139,25 @@ public class ImmersiveCrosshairInitTests
             { "HasHud", true },
             { "holdingRanged", false },
             { "holdingSalvage", true },
+            { "HitInfo", true },
+            { "bHitValid", true },
+            { "hit.distanceSq", MinimumInteractableDistance }
+        });
+
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
+
+        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
+    
+    [Test]
+    public void it_enables_crosshair_having_an_interactable_in_distance_while_bare_hands_tool()
+    {
+        var (playerLocal, hud) = Factory.CreatePostfixFactory(new Dictionary<string, object>
+        {
+            { "HasHud", true },
+            { "holdingRanged", false },
+            { "holdingSalvage", false },
+            { "holdingBareHands", true },
             { "HitInfo", true },
             { "bHitValid", true },
             { "hit.distanceSq", MinimumInteractableDistance }

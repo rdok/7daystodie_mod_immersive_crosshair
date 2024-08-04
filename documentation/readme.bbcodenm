@@ -14,9 +14,13 @@
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.2.0 - 04 Aug 2024[/size]
+[list]
+[*] [url=https://www.nexusmods.com/7daystodie/articles/813]Hides crosshair when holding any ranged weapons.[/url]
+[*] Fix: enable crosshair having bare hands, or knuckles like tools.[/list]
 [size=3]v1.1.1 - 04 Aug 2024[/size]
 [list]
-[*] Remove debug logs from production release[/list]
+[*] Removes debug logs from production release[/list]
 [size=3]v1.1.0 - 03 Aug 2024[/size]
 [list]
 [*] Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
@@ -42,6 +46,10 @@ These mods have been manually verified for compatibility, though my gameplay.
 [list]
 [*] [url=https://harmony.pardeike.net/articles/patching-postfix.html]Harmony Patching[/url]
 [*] [url=https://github.com/devlooped/moq]devlooped/moq[/url]
+[/list]
+[size=4]Credits[/size]
+[list]
+[*] [url=https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059]MrSamuelAdams1992[/url] for his feedback on improving this mod and bug reporting.
 [/list]
 [size=5]FAQs[/size]
 

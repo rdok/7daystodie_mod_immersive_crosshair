@@ -12,16 +12,14 @@ namespace ImmersiveCrosshair.Harmony
         public void Warn(string message)
         {
 #if DEBUG
-            Log.Warning(message);
-            Log.Out("[ImmersiveCrosshair]: " + message);
+            Log.Warning("[ImmersiveCrosshair]: " + message);
 #endif
         }
 
         public void Error(string message)
         {
 #if DEBUG
-            Log.Error(message);
-            Log.Out("[ImmersiveCrosshair]: " + message);
+            Log.Error("[ImmersiveCrosshair]: " + message);
 #endif
         }
     }

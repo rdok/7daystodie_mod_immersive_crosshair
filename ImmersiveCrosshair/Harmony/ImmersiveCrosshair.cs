@@ -42,16 +42,16 @@ namespace ImmersiveCrosshair.Harmony
             var holdingItem = entityPlayerLocal.inventory.holdingItemItemValue;
             var actions = holdingItem?.ItemClass?.Actions;
 
-            var holdingRangedWeapon = actions?.Any(action => action.IsRanged) ?? false;
-            if (holdingRangedWeapon)
+            var holdingRanged = actions?.Any(action => action.IsRanged) ?? false;
+            if (holdingRanged)
             {
-                _logger.Info("ApplyPatch: Holding a ranged weapon. Enabling crosshair.");
-                hud.showCrosshair = true;
+                _logger.Info("ApplyPatch: Holding a ranged weapon with iron sights. Disabling crosshair.");
+                hud.showCrosshair = false;
                 return;
             }
 
             var holdsInteractable = actions?.Any(
-                action => action.IsHarvest || action.IsRepair || action.IsSalvage
+                action => action.IsHarvest || action.IsRepair || action.IsSalvage || action.IsBareHands
             ) ?? false;
 
             if (!holdsInteractable)

@@ -40,26 +40,32 @@ public static class Factory
         var actions = new List<IItemAction>();
 
         var itemActionRanged = new Mock<IItemActionRanged>();
-        itemActionRanged.Setup(p => p.IsHarvest).Returns(true);
         var holdingRanged = parameters.ContainsKey("holdingRanged") && (bool)parameters["holdingRanged"];
+        itemActionRanged.Setup(p => p.IsRanged).Returns(holdingRanged);
         if (holdingRanged) actions.Add(itemActionRanged.Object);
 
         var itemActionRepair = new Mock<IItemActionRepair>();
-        itemActionRepair.Setup(p => p.IsRepair).Returns(true);
         var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
+        itemActionRepair.Setup(p => p.IsRepair).Returns(holdingRepair);
         if (holdingRepair) actions.Add(itemActionRepair.Object);
 
         var itemActionHarvest = new Mock<IItemActionHarvest>();
-        itemActionHarvest.Setup(p => p.IsHarvest).Returns(true);
         var holdingHarvest =
             parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
+        itemActionHarvest.Setup(p => p.IsHarvest).Returns(holdingHarvest);
         if (holdingHarvest) actions.Add(itemActionHarvest.Object);
         
         var itemActionSalvage = new Mock<IItemActionSalvage>();
-        itemActionSalvage.Setup(p => p.IsSalvage).Returns(true);
         var holdingSalvage =
             parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
+        itemActionSalvage.Setup(p => p.IsSalvage).Returns(holdingSalvage);
         if (holdingSalvage) actions.Add(itemActionSalvage.Object);
+        
+        var itemActionBareHands = new Mock<IItemActionBareHands>();
+        var holdingBareHands =
+            parameters.ContainsKey("holdingBareHands") && (bool)parameters["holdingBareHands"];
+        itemActionBareHands.Setup(p => p.IsBareHands).Returns(holdingBareHands);
+        if (holdingBareHands) actions.Add(itemActionBareHands.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
 

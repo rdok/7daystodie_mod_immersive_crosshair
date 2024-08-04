@@ -150,7 +150,7 @@ namespace ImmersiveCrosshair.Harmony
     public class ItemActionAdapter : IItemAction
     {
         private readonly ItemAction _itemAction;
-        private static ILogger _logger = new Logger();
+        private static readonly ILogger Logger = new Logger();
 
         public ItemActionAdapter(ItemAction itemAction)
         {
@@ -159,46 +159,68 @@ namespace ImmersiveCrosshair.Harmony
 
         bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
         bool IItemAction.IsRepair => _itemAction is ItemActionRepair;
-        bool IItemAction.IsHarvest => HasAnyTag(_itemAction, new[] { "harvestingSkill" });
-        bool IItemAction.IsSalvage => HasAnyTag(_itemAction, new[] { "salvageTool", "salvagingSkills" });
+        bool IItemAction.IsBareHands => HasTags(_itemAction, new[] { "blunt", "perkBrawler" }, TagCheckType.All);
+        bool IItemAction.IsHarvest => HasTags(_itemAction, new[] { "harvestingSkill" }, TagCheckType.Any);
+
+        bool IItemAction.IsSalvage =>
+            HasTags(_itemAction, new[] { "salvageTool", "salvagingSkills" }, TagCheckType.Any);
+
+        private enum TagCheckType
+        {
+            Any,
+            All
+        }
 
         /**
          * hammer: repairTool|repairingTools
          * wrench: salvageTool|salvagingSkills
          * shovel: harvestingSkill
          */
-        private static bool HasAnyTag([CanBeNull] ItemAction _itemAction, string[] tagNames)
+        private static bool HasTags([CanBeNull] ItemAction _itemAction, string[] tagNames, TagCheckType checkType)
         {
-            _logger.Info("HasAnyTag: Checking if the item has any of the specified tags.");
+            Logger.Info("HasAnyTag: Checking if the item has any of the specified tags.");
 
             if (_itemAction == null)
             {
-                _logger.Info("HasAnyTag: _itemAction is null");
+                Logger.Info("HasAnyTag: _itemAction is null");
                 return false;
             }
 
             if (_itemAction.item == null)
             {
-                _logger.Info("HasAnyTag: _itemAction.item is null");
+                Logger.Info("HasAnyTag: _itemAction.item is null");
                 return false;
             }
 
             if (!_itemAction.item.Properties.Values.ContainsKey("Tags"))
             {
-                _logger.Info("HasAnyTag: No tags in _itemAction.item.Properties.Values");
+                Logger.Info("HasAnyTag: No tags in _itemAction.item.Properties.Values");
                 return false;
             }
 
             var tags = _itemAction.item.Properties.Values["Tags"];
-            _logger.Info($"HasAnyTag: Item Tags: {tags}");
+            Logger.Info($"HasAnyTag: Item Tags: {tags}");
 
-            var hasTag = tagNames.Any(tagName => tags.Contains(tagName));
+            bool hasTags;
 
-            _logger.Info(hasTag
-                ? "The item has at least one of the specified tags."
-                : "The item does not have any of the specified tags.");
+            switch (checkType)
+            {
+                case TagCheckType.Any:
+                    hasTags = tagNames.Any(tagName => tags.Contains(tagName));
+                    break;
+                case TagCheckType.All:
+                    hasTags = tagNames.All(tagName => tags.Contains(tagName));
+                    break;
+                default:
+                    Logger.Info("HasTags: Invalid check type");
+                    return false;
+            }
 
-            return hasTag;
+            Logger.Info(hasTags
+                ? $"The item has {checkType.ToString().ToLower()} of the specified tags."
+                : $"The item does not have {checkType.ToString().ToLower()} of the specified tags.");
+
+            return hasTags;
         }
 
 

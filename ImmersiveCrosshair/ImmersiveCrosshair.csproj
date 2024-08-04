@@ -13,6 +13,10 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <ModName>ImmersiveCrosshair</ModName>
+        <ModVersion>1.2.0</ModVersion>
+        <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
+        <ModId>5601</ModId>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +36,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>3</WarningLevel>
+        <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Harmony\Interfaces.cs"/>
@@ -68,9 +73,21 @@
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 
-    <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
-        <Exec Command="npm run build" WorkingDirectory="$(MSBuildProjectDirectory)\.."/>
+    <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release'">
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Name/@value" Value="$(ModName)"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/DisplayName/@value" Value="$(ModDescription)"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Author/@value" Value="Rizarttt"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Description/@value" Value="$(ModName)"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Version/@value" Value="$(ModVersion)"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value" Value="https://www.nexusmods.com/7daystodie/mods/5601"/>
+        
+        <Exec
+                Condition=" '$(Configuration)' != 'Debug' " 
+                Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
+                WorkingDirectory="$(MSBuildProjectDirectory)\.." 
+        />
         <Exec Command="npm run generate_readme" WorkingDirectory="$(MSBuildProjectDirectory)\.."/>
+
     </Target>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

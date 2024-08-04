@@ -1,30 +1,33 @@
-const { readFileSync, unlinkSync, rmSync, cpSync, writeFileSync } = require("fs");
-const { join } = require("path");
-const { execSync } = require("child_process");
-require("dotenv").config();
+const {unlinkSync, rmSync, cpSync} = require("fs");
+const {join} = require("path");
+const {execSync} = require("child_process");
 
-const modInfoXmlPath = join(__dirname, "..", "ImmersiveCrosshair/ModInfo.xml");
-const modInfoXmlRaw = readFileSync(modInfoXmlPath, "utf8");
-const versionMatch = modInfoXmlRaw.match(/<Version value="([\d.]+)"/);
-if (!versionMatch) {
-  throw new Error("Version not found in ModInfo.xml");
+const args = process.argv.slice(2);
+if (args.length < 2) {
+    console.error("Usage: node script.js <absoluteOutputPath> <modName> <modVersion>");
+    process.exit(1);
 }
-const version = versionMatch[1];
 
-const artifact = `${process.env.IMMERSIVE_CROSSHAIR} ${version}.7z`;
-const srcDir = join(__dirname, "../ImmersiveCrosshair/bin/Release");
+console.debug(args);
+const absoluteOutputPath = args[0];
+const newModName = args[1];
+const newVersion = args[2];
+
+const artifact = `${newModName}_${newVersion}.7z`;
 const distDir = join(__dirname, "..", "dist");
-const buildDir = join(distDir, process.env.IMMERSIVE_CROSSHAIR);
+const buildDir = join(distDir, newModName);
 
 try {
-  unlinkSync(artifact);
-  rmSync(distDir, { recursive: true });
+    unlinkSync(artifact);
+    rmSync(distDir, {recursive: true});
 } catch (e) {
-  // Expected behaviour if it doesn't exist.
+    // Expected behavior if it doesn't exist.
 }
 
-cpSync(srcDir, buildDir, { recursive: true });
+cpSync(absoluteOutputPath, buildDir, {recursive: true});
 
 execSync(
-  `.\\node_modules\\7z-bin\\win32\\7z.exe a "${artifact}" "${buildDir}"`,
+    `.\\node_modules\\7z-bin\\win32\\7z.exe a "${artifact}" "${buildDir}"`
 );
+
+console.log(`Build completed: ${artifact}`);

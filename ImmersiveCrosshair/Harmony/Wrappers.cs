@@ -150,6 +150,7 @@ namespace ImmersiveCrosshair.Harmony
     public class ItemActionAdapter : IItemAction
     {
         private readonly ItemAction _itemAction;
+        private static ILogger _logger = new Logger();
 
         public ItemActionAdapter(ItemAction itemAction)
         {
@@ -168,32 +169,32 @@ namespace ImmersiveCrosshair.Harmony
          */
         private static bool HasAnyTag([CanBeNull] ItemAction _itemAction, string[] tagNames)
         {
-            Log.Out("HasAnyTag: Checking if the item has any of the specified tags.");
+            _logger.Info("HasAnyTag: Checking if the item has any of the specified tags.");
 
             if (_itemAction == null)
             {
-                Log.Out("HasAnyTag: _itemAction is null");
+                _logger.Info("HasAnyTag: _itemAction is null");
                 return false;
             }
 
             if (_itemAction.item == null)
             {
-                Log.Out("HasAnyTag: _itemAction.item is null");
+                _logger.Info("HasAnyTag: _itemAction.item is null");
                 return false;
             }
 
             if (!_itemAction.item.Properties.Values.ContainsKey("Tags"))
             {
-                Log.Out("HasAnyTag: No tags in _itemAction.item.Properties.Values");
+                _logger.Info("HasAnyTag: No tags in _itemAction.item.Properties.Values");
                 return false;
             }
 
             var tags = _itemAction.item.Properties.Values["Tags"];
-            Log.Out($"HasAnyTag: Item Tags: {tags}");
+            _logger.Info($"HasAnyTag: Item Tags: {tags}");
 
             var hasTag = tagNames.Any(tagName => tags.Contains(tagName));
 
-            Log.Out(hasTag
+            _logger.Info(hasTag
                 ? "The item has at least one of the specified tags."
                 : "The item does not have any of the specified tags.");
 

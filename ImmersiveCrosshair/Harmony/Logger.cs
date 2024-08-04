@@ -5,7 +5,7 @@ namespace ImmersiveCrosshair.Harmony
         public void Info(string message)
         {
 #if DEBUG
-            Log.Out(message);
+            Log.Out("[ImmersiveCrosshair]: " + message);
 #endif
         }
 
@@ -13,6 +13,7 @@ namespace ImmersiveCrosshair.Harmony
         {
 #if DEBUG
             Log.Warning(message);
+            Log.Out("[ImmersiveCrosshair]: " + message);
 #endif
         }
 
@@ -20,6 +21,7 @@ namespace ImmersiveCrosshair.Harmony
         {
 #if DEBUG
             Log.Error(message);
+            Log.Out("[ImmersiveCrosshair]: " + message);
 #endif
         }
     }

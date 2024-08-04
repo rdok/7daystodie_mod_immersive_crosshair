@@ -13,15 +13,18 @@
 [*] 7daystodie Version: 1.0 (b333)
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [/list]
-[size=5]Features[/size]
-[size=3]v1.0.0[/size]
+[size=5]Changelog[/size]
+[size=3]v1.1.1 - 04 Aug 2024[/size]
+[list]
+[*] Remove debug logs from production release[/list]
+[size=3]v1.1.0 - 03 Aug 2024[/size]
+[list]
+[*] Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
+[*] Hides crosshair when holding a melee weapon.[/list]
+[size=3]v1.0.0 - 02 Aug 2024[/size]
 [list]
 [*] Activates the crosshair only when close enough to interact with an object.
-[*] Preserves the default behavior for ranged weapons.[/list]
-[size=3]v1.1.0[/size]
-[list]
-[*] The crosshair activates when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
-[*] The crosshair is hidden when holding a melee weapon.
+[*] Preserves the default behavior for ranged weapons.
 [/list]
 [size=5]Recommended Mods[/size]
 [quote]

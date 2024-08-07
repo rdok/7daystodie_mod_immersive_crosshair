@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveCrosshair</ModName>
-        <ModVersion>1.2.0</ModVersion>
+        <ModVersion>1.2.1</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
     </PropertyGroup>
@@ -80,7 +80,7 @@
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Description/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Version/@value" Value="$(ModVersion)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value" Value="https://www.nexusmods.com/7daystodie/mods/5601"/>
-        
+         
         <Exec
                 Condition=" '$(Configuration)' != 'Debug' " 
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"

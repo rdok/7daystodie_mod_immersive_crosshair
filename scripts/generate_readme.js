@@ -3,8 +3,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 const filePaths = [
-  path.join(__dirname, "..", "documentation", "about.md"),
-  path.join(__dirname, "..", "documentation", "faq.md")
+  path.join(__dirname, "..", "documentation", "about.md")
 ];
 
 let generatedWarningMessage =

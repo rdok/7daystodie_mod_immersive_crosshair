@@ -14,10 +14,15 @@
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [/list]
 [size=5]Changelog[/size]
-[size=3]v1.2.1 - 07 Aug 2024[/size]
+[size=3]v1.3.0 - 08 Aug 2024[/size]
 [list]
 [*] Fix: does not hide the crosshair when not in first person view. 
+[list]
 [*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/37992605]Khajits[/url] for identifying this issue.[/list]
+[*] Fix: shows crosshair holding a knife.
+[list]
+[*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/78780238]MrSamuelAdams1992[/url] for identifying this issue.[/list]
+[*] Feature: increased the interactable items distance by 4.6% as per popular request. [/list]
 [size=3]v1.2.0 - 04 Aug 2024[/size]
 [list]
 [*] [url=https://www.nexusmods.com/7daystodie/articles/813]Hides crosshair when holding any ranged weapons.[/url]
@@ -55,25 +60,3 @@ These mods have been manually verified for compatibility, though my gameplay.
 [list]
 [*] [url=https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059]MrSamuelAdams1992[/url] for his feedback on improving this mod and bug reporting.
 [/list]
-[size=5]FAQs[/size]
-
-[b]Does the crosshair-hiding feature work with guns or other ranged weapons?[/b]
-
-No, the mod does not hide the crosshair for guns or any other ranged weapons.
-
-[b]When does the crosshair get hidden?[/b]
-
-The crosshair is hidden when using melee weapons or when you're not holding anything.
-
-[b]What is this mod about?[/b]
-
-This mod focuses on hiding the crosshair to provide a cleaner screen when using melee weapons or holding nothing.
-
-[b]Can I change the mod or use its code?[/b]
-
-Yes! The mod is open-source, so you can modify and share it. More modders mean more mods.
-
-[b]What if the crosshair doesn't hide as it should?[/b]
-
-If the crosshair still shows when it shouldn't, update to the latest version to fix any bugs.
-

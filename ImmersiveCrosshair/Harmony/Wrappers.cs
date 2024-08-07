@@ -165,6 +165,7 @@ namespace ImmersiveCrosshair.Harmony
         bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
         bool IItemAction.IsRepair => _itemAction is ItemActionRepair;
         bool IItemAction.IsBareHands => HasTags(_itemAction, new[] { "blunt", "perkBrawler" }, TagCheckType.All);
+        bool IItemAction.IsKnife  => HasTags(_itemAction, new[] { "knife" }, TagCheckType.All);
         bool IItemAction.IsHarvest => HasTags(_itemAction, new[] { "harvestingSkill" }, TagCheckType.Any);
 
         bool IItemAction.IsSalvage =>

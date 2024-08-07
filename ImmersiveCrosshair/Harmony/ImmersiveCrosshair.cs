@@ -20,7 +20,7 @@ namespace ImmersiveCrosshair.Harmony
                 _logger.Info("ApplyPatch: entityPlayerLocal is null. Exiting.");
                 return;
             }
-                
+
             _logger.Info("ApplyPatch: Retrieving playerUI from entityPlayerLocal.");
             var playerUI = entityPlayerLocal.playerUI;
 
@@ -56,7 +56,8 @@ namespace ImmersiveCrosshair.Harmony
             }
 
             var holdsInteractable = actions?.Any(
-                action => action.IsHarvest || action.IsRepair || action.IsSalvage || action.IsBareHands
+                action => action.IsHarvest || action.IsRepair || action.IsSalvage || action.IsBareHands ||
+                          action.IsKnife
             ) ?? false;
 
             if (!holdsInteractable)
@@ -79,7 +80,7 @@ namespace ImmersiveCrosshair.Harmony
             _logger.Info(
                 $"ApplyPatch: HitInfo is valid: {hitInfo.bHitValid}, distance squared: {hitInfo.hit.distanceSq}.");
 
-            var hasInteractable = hitInfo.bHitValid && Mathf.Sqrt(hitInfo.hit.distanceSq) <= 2.3f;
+            var hasInteractable = hitInfo.bHitValid && Mathf.Sqrt(hitInfo.hit.distanceSq) <= 2.4f;
 
             _logger.Info(hasInteractable
                 ? "ApplyPatch: Interactable object detected within range. Enabling crosshair."

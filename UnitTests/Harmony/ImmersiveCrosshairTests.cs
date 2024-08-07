@@ -102,9 +102,6 @@ public class ImmersiveCrosshairInitTests
             { "HasHud", true },
             { "HitInfo", true },
             { "bHitValid", true },
-            { "holdingRanged", false },
-            { "holdingRepair", true },
-            { "hit.distanceSq", MinimumInteractableDistance + .1f },
         });
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
@@ -175,6 +172,25 @@ public class ImmersiveCrosshairInitTests
         {
             { "HasHud", true },
             { "HasFirstPersonView", false },
+        });
+
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
+
+        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
+    
+    [Test]
+    public void it_enables_crosshair_having_an_interactable_in_distance_while_knife_tool()
+    {
+        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
+        {
+            { "HasHud", true },
+            { "holdingRanged", false },
+            { "holdingSalvage", false },
+            { "holdingKnife", true },
+            { "HitInfo", true },
+            { "bHitValid", true },
+            { "hit.distanceSq", MinimumInteractableDistance }
         });
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);

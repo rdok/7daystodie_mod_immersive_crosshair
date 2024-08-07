@@ -31,6 +31,7 @@ namespace ImmersiveCrosshair.Harmony
         bool IsHarvest { get; }
         bool IsSalvage { get; }
         bool IsBareHands { get; }
+        bool IsKnife { get; }
         object GetType();
         bool IsNull();
     }

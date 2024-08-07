@@ -7,7 +7,7 @@ namespace UnitTests.Harmony;
 public static class Factory
 {
     public static (Mock<IEntityPlayerLocal>, Mock<IGuiWdwInGameHUD>)
-        CreatePostfixFactory(Dictionary<string, object> parameters)
+        Create(Dictionary<string, object> parameters)
     {
         var playerUI = new Mock<ILocalPlayerUI>();
         var hudMock = new Mock<IGuiWdwInGameHUD>();
@@ -23,6 +23,7 @@ public static class Factory
         var hasHitInfo = parameters.ContainsKey("HitInfo") && (bool)parameters["HitInfo"];
         var hasBHitValid = parameters.ContainsKey("bHitValid") && (bool)parameters["bHitValid"];
         var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 1;
+        var hasFirstPersonView = parameters.ContainsKey("HasFirstPersonView") && (bool)parameters["HasFirstPersonView"];
 
         holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
         inventory.Setup(p => p.holdingItemItemValue)
@@ -33,6 +34,7 @@ public static class Factory
         playerLocal.Setup(p => p.inventory).Returns(inventory.Object);
         playerLocal.Setup(p => p.HitInfo)
             .Returns(hasHitInfo ? hitInfo.Object : null);
+        playerLocal.Setup(p => p.bFirstPersonView).Returns(hasFirstPersonView);
         hitInfo.Setup(p => p.bHitValid).Returns(hasBHitValid);
         hitInfo.Setup(p => p.hit).Returns(hit.Object);
         hit.Setup(p => p.distanceSq).Returns(distanceSq);
@@ -54,13 +56,13 @@ public static class Factory
             parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
         itemActionHarvest.Setup(p => p.IsHarvest).Returns(holdingHarvest);
         if (holdingHarvest) actions.Add(itemActionHarvest.Object);
-        
+
         var itemActionSalvage = new Mock<IItemActionSalvage>();
         var holdingSalvage =
             parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
         itemActionSalvage.Setup(p => p.IsSalvage).Returns(holdingSalvage);
         if (holdingSalvage) actions.Add(itemActionSalvage.Object);
-        
+
         var itemActionBareHands = new Mock<IItemActionBareHands>();
         var holdingBareHands =
             parameters.ContainsKey("holdingBareHands") && (bool)parameters["holdingBareHands"];

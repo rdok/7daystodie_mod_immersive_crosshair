@@ -16,7 +16,7 @@
 [size=5]Changelog[/size]
 [size=3]v1.3.0 - 08 Aug 2024[/size]
 [list]
-[*] Fix: does not hide the crosshair when not in first person view. 
+[*] Feature: shows crosshair when in third person view and holding a ranged weapon.
 [list]
 [*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/37992605]Khajits[/url] for identifying this issue.[/list]
 [*] Fix: shows crosshair holding a knife.

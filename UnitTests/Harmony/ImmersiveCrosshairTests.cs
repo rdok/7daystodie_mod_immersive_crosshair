@@ -127,7 +127,7 @@ public class ImmersiveCrosshairInitTests
 
         hud.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
-    
+
     [Test]
     public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_salvage_tool()
     {
@@ -145,7 +145,7 @@ public class ImmersiveCrosshairInitTests
 
         hud.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
-    
+
     [Test]
     public void it_enables_crosshair_having_an_interactable_in_distance_while_bare_hands_tool()
     {
@@ -164,21 +164,22 @@ public class ImmersiveCrosshairInitTests
 
         hud.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
-    
+
     [Test]
-    public void it_enables_crosshair_having_non_first_person_view()
+    public void it_enables_crosshair_having_non_first_person_view_and_holding_ranged_weapon()
     {
         var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
         {
             { "HasHud", true },
             { "HasFirstPersonView", false },
+            { "holdingRanged", true },
         });
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
 
         hud.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
-    
+
     [Test]
     public void it_enables_crosshair_having_an_interactable_in_distance_while_knife_tool()
     {

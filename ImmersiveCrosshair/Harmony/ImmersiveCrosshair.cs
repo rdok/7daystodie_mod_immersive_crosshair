@@ -33,13 +33,6 @@ namespace ImmersiveCrosshair.Harmony
                 return;
             }
 
-            if (!entityPlayerLocal.bFirstPersonView)
-            {
-                _logger.Info("ApplyPatch: entityPlayerLocal is not using third camera.");
-                hud.showCrosshair = true;
-                return;
-            }
-
             _logger.Info("ApplyPatch: IGuiWdwInGameHUD retrieved successfully.");
 
 
@@ -48,12 +41,21 @@ namespace ImmersiveCrosshair.Harmony
             var actions = holdingItem?.ItemClass?.Actions;
 
             var holdingRanged = actions?.Any(action => action.IsRanged) ?? false;
+
+            if (holdingRanged && !entityPlayerLocal.bFirstPersonView)
+            {
+                _logger.Info("ApplyPatch: entityPlayerLocal is not using third camera.");
+                hud.showCrosshair = true;
+                return;
+            }
+
             if (holdingRanged)
             {
                 _logger.Info("ApplyPatch: Holding a ranged weapon with iron sights. Disabling crosshair.");
                 hud.showCrosshair = false;
                 return;
             }
+
 
             var holdsInteractable = actions?.Any(
                 action => action.IsHarvest || action.IsRepair || action.IsSalvage || action.IsBareHands ||

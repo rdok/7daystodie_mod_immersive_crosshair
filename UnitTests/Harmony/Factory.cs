@@ -23,7 +23,8 @@ public static class Factory
         var hasHitInfo = parameters.ContainsKey("HitInfo") && (bool)parameters["HitInfo"];
         var hasBHitValid = parameters.ContainsKey("bHitValid") && (bool)parameters["bHitValid"];
         var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 1;
-        var hasFirstPersonView = parameters.ContainsKey("HasFirstPersonView") && (bool)parameters["HasFirstPersonView"];
+        var hasFirstPersonView =
+            parameters.ContainsKey("HasFirstPersonView") ? (bool)parameters["HasFirstPersonView"] : true;
 
         holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
         inventory.Setup(p => p.holdingItemItemValue)
@@ -62,6 +63,12 @@ public static class Factory
             parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
         itemActionSalvage.Setup(p => p.IsSalvage).Returns(holdingSalvage);
         if (holdingSalvage) actions.Add(itemActionSalvage.Object);
+        
+        var itemActionKnife = new Mock<IItemActionBareHands>();
+        var holdingKnife =
+            parameters.ContainsKey("holdingKnife") && (bool)parameters["holdingKnife"];
+        itemActionKnife.Setup(p => p.IsKnife).Returns(holdingKnife);
+        if (holdingKnife) actions.Add(itemActionKnife.Object);
 
         var itemActionBareHands = new Mock<IItemActionBareHands>();
         var holdingBareHands =

@@ -13,6 +13,9 @@
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  
+#### v1.2.1 - 07 Aug 2024
+- Fix: does not hide the crosshair when not in first person view. 
+- Many thanks to [Khajits](https://www.nexusmods.com/7daystodie/users/37992605) for identifying this issue.
 #### v1.2.0 - 04 Aug 2024
 - [Hides crosshair when holding any ranged weapons.](https://www.nexusmods.com/7daystodie/articles/813)
 - Fix: enable crosshair having bare hands, or knuckles like tools.

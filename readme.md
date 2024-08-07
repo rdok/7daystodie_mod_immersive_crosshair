@@ -44,10 +44,6 @@
 
 - [Harmony Patching](https://harmony.pardeike.net/articles/patching-postfix.html)
 - [devlooped/moq](https://github.com/devlooped/moq)
- 
-### Credits
-- [MrSamuelAdams1992](https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059) for his feedback on improving this mod and bug reporting.
-
 
 
 ***

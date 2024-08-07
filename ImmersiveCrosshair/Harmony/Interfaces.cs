@@ -10,6 +10,7 @@ namespace ImmersiveCrosshair.Harmony
         ILocalPlayerUI playerUI { get; }
         IInventory inventory { get; }
         IWorldRayHitInfo HitInfo { get; }
+        bool bFirstPersonView { get; set; }
     }
 
     public interface IInventory

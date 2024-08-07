@@ -62,6 +62,11 @@ namespace ImmersiveCrosshair.Harmony
         public ILocalPlayerUI playerUI => new LocalPlayerUIWrapper(_entityPlayerLocal.playerUI);
         public IInventory inventory => new InventoryWrapper(_entityPlayerLocal.inventory);
         public IWorldRayHitInfo HitInfo => new HitInfoWrapper(_entityPlayerLocal.HitInfo);
+        public bool bFirstPersonView
+        {
+            get => _entityPlayerLocal.bFirstPersonView;
+            set => _entityPlayerLocal.bFirstPersonView = value;
+        }
     }
 
     public class InventoryWrapper : IInventory

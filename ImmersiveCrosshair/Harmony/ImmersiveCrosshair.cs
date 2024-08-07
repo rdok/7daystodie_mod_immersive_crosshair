@@ -15,14 +15,12 @@ namespace ImmersiveCrosshair.Harmony
 
         public static void ApplyPatch(IEntityPlayerLocal entityPlayerLocal)
         {
-            _logger.Info("ApplyPatch: Starting patch application.");
-
             if (entityPlayerLocal == null)
             {
                 _logger.Info("ApplyPatch: entityPlayerLocal is null. Exiting.");
                 return;
             }
-
+                
             _logger.Info("ApplyPatch: Retrieving playerUI from entityPlayerLocal.");
             var playerUI = entityPlayerLocal.playerUI;
 
@@ -32,6 +30,13 @@ namespace ImmersiveCrosshair.Harmony
             if (hud == null)
             {
                 _logger.Info("ApplyPatch: IGuiWdwInGameHUD is null. Exiting.");
+                return;
+            }
+
+            if (!entityPlayerLocal.bFirstPersonView)
+            {
+                _logger.Info("ApplyPatch: entityPlayerLocal is not using third camera.");
+                hud.showCrosshair = true;
                 return;
             }
 

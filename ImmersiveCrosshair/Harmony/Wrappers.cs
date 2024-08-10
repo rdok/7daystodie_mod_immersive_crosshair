@@ -62,6 +62,7 @@ namespace ImmersiveCrosshair.Harmony
         public ILocalPlayerUI playerUI => new LocalPlayerUIWrapper(_entityPlayerLocal.playerUI);
         public IInventory inventory => new InventoryWrapper(_entityPlayerLocal.inventory);
         public IWorldRayHitInfo HitInfo => new HitInfoWrapper(_entityPlayerLocal.HitInfo);
+
         public bool bFirstPersonView
         {
             get => _entityPlayerLocal.bFirstPersonView;
@@ -162,14 +163,8 @@ namespace ImmersiveCrosshair.Harmony
             _itemAction = itemAction;
         }
 
-        bool IItemAction.IsRanged => _itemAction is ItemActionRanged;
-        bool IItemAction.IsRepair => _itemAction is ItemActionRepair;
-        bool IItemAction.IsBareHands => HasTags(_itemAction, new[] { "blunt", "perkBrawler" }, TagCheckType.All);
-        bool IItemAction.IsKnife  => HasTags(_itemAction, new[] { "knife" }, TagCheckType.All);
-        bool IItemAction.IsHarvest => HasTags(_itemAction, new[] { "harvestingSkill" }, TagCheckType.Any);
-
-        bool IItemAction.IsSalvage =>
-            HasTags(_itemAction, new[] { "salvageTool", "salvagingSkills" }, TagCheckType.Any);
+        bool IItemAction.IsTool =>
+            HasTags(_itemAction, new[] { "tool", "harvestingSkill", "knife", "perkBrawler" }, TagCheckType.Any);
 
         private enum TagCheckType
         {
@@ -177,26 +172,9 @@ namespace ImmersiveCrosshair.Harmony
             All
         }
 
-        /**
-         * hammer: repairTool|repairingTools
-         * wrench: salvageTool|salvagingSkills
-         * shovel: harvestingSkill
-         */
         private static bool HasTags([CanBeNull] ItemAction _itemAction, string[] tagNames, TagCheckType checkType)
         {
-            Logger.Info("HasAnyTag: Checking if the item has any of the specified tags.");
-
-            if (_itemAction == null)
-            {
-                Logger.Info("HasAnyTag: _itemAction is null");
-                return false;
-            }
-
-            if (_itemAction.item == null)
-            {
-                Logger.Info("HasAnyTag: _itemAction.item is null");
-                return false;
-            }
+            if (_itemAction?.item == null) return false;
 
             if (!_itemAction.item.Properties.Values.ContainsKey("Tags"))
             {
@@ -227,17 +205,6 @@ namespace ImmersiveCrosshair.Harmony
                 : $"The item does not have {checkType.ToString().ToLower()} of the specified tags.");
 
             return hasTags;
-        }
-
-
-        public bool IsNull()
-        {
-            return _itemAction == null;
-        }
-
-        public new object GetType()
-        {
-            return _itemAction.GetType();
         }
     }
 }

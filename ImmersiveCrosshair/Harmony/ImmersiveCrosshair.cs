@@ -7,6 +7,7 @@ namespace ImmersiveCrosshair.Harmony
     public class ImmersiveCrosshair
     {
         private static ILogger _logger = new Logger();
+        public const float MinimumInteractableDistance = 2.4f;
 
         public static void SetLogger(ILogger logger)
         {
@@ -15,82 +16,38 @@ namespace ImmersiveCrosshair.Harmony
 
         public static void ApplyPatch(IEntityPlayerLocal entityPlayerLocal)
         {
-            if (entityPlayerLocal == null)
-            {
-                _logger.Info("ApplyPatch: entityPlayerLocal is null. Exiting.");
-                return;
-            }
+            if (entityPlayerLocal == null) return;
 
-            _logger.Info("ApplyPatch: Retrieving playerUI from entityPlayerLocal.");
             var playerUI = entityPlayerLocal.playerUI;
-
-            _logger.Info("ApplyPatch: Attempting to retrieve IGuiWdwInGameHUD from playerUI.");
             var hud = playerUI.GetComponentInChildren<IGuiWdwInGameHUD>();
 
-            if (hud == null)
-            {
-                _logger.Info("ApplyPatch: IGuiWdwInGameHUD is null. Exiting.");
-                return;
-            }
+            if (hud == null) return;
 
-            _logger.Info("ApplyPatch: IGuiWdwInGameHUD retrieved successfully.");
-
-
-            _logger.Info("ApplyPatch: Checking currently held item.");
             var holdingItem = entityPlayerLocal.inventory.holdingItemItemValue;
             var actions = holdingItem?.ItemClass?.Actions;
 
-            var holdingRanged = actions?.Any(action => action.IsRanged) ?? false;
-
-            if (holdingRanged && !entityPlayerLocal.bFirstPersonView)
+            if (!entityPlayerLocal.bFirstPersonView)
             {
-                _logger.Info("ApplyPatch: entityPlayerLocal is not using third camera.");
                 hud.showCrosshair = true;
                 return;
             }
 
-            if (holdingRanged)
-            {
-                _logger.Info("ApplyPatch: Holding a ranged weapon with iron sights. Disabling crosshair.");
-                hud.showCrosshair = false;
-                return;
-            }
-
-
-            var holdsInteractable = actions?.Any(
-                action => action.IsHarvest || action.IsRepair || action.IsSalvage || action.IsBareHands ||
-                          action.IsKnife
-            ) ?? false;
+            var holdsInteractable = actions?.Any(action => action.IsTool) ?? false;
 
             if (!holdsInteractable)
             {
-                _logger.Info(
-                    "ApplyPatch: Holding item is neither a harvest, repair, or terrain tool. Hiding crosshair.");
                 hud.showCrosshair = false;
                 return;
             }
 
-            _logger.Info("ApplyPatch: Retrieving hit information from entityPlayerLocal.");
             var hitInfo = entityPlayerLocal.HitInfo;
 
-            if (hitInfo == null)
-            {
-                _logger.Info("ApplyPatch: HitInfo is null. Exiting.");
-                return;
-            }
+            if (hitInfo == null) return;
 
-            _logger.Info(
-                $"ApplyPatch: HitInfo is valid: {hitInfo.bHitValid}, distance squared: {hitInfo.hit.distanceSq}.");
-
-            var hasInteractable = hitInfo.bHitValid && Mathf.Sqrt(hitInfo.hit.distanceSq) <= 2.4f;
-
-            _logger.Info(hasInteractable
-                ? "ApplyPatch: Interactable object detected within range. Enabling crosshair."
-                : "ApplyPatch: No interactable object within range. Disabling crosshair.");
+            var hasInteractable =
+                hitInfo.bHitValid && Mathf.Sqrt(hitInfo.hit.distanceSq) <= MinimumInteractableDistance;
 
             hud.showCrosshair = hasInteractable;
-
-            _logger.Info("ApplyPatch: Patch application completed.");
         }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
@@ -7,195 +8,67 @@ namespace UnitTests.Harmony;
 [TestFixture]
 public class ImmersiveCrosshairInitTests
 {
-    private const float MinimumInteractableDistance = (float)5.2;
+    private const float MinimumInteractableDistance =
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.MinimumInteractableDistance;
+
+    protected virtual Dictionary<string, object> InteractableInput => new()
+    {
+        { "HasHud", true },
+        { "HitInfo", true },
+        { "bHitValid", true },
+        { "holdingToolTag", true },
+        { "hit.distanceSq", MinimumInteractableDistance }
+    };
 
     [Test]
     public void it_does_not_change_crosshair_when_hud_is_not_loaded()
     {
         var (playerLocalMock, hudMock) = Factory.Create(
-            new Dictionary<string, object> { { "HasHud", false } }
+            new Dictionary<string, object>(InteractableInput) { ["HasHud"] = false }
         );
-
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
-
         hudMock.VerifyNoOtherCalls();
     }
 
+
     [Test]
-    public void it_disables_crosshair_holding_a_ranged_weapon()
+    public void it_hides_the_crosshair_having_no_interactable_in_distance()
     {
-        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>
-            {
-                { "HasHud", true },
-                { "HitInfo", true },
-                { "bHitValid", true },
-                { "holdingRanged", true },
-                { "holdingHarvest", false },
-                { "holdingRepair", false },
-            }
-        );
-
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(InteractableInput)
+        {
+            ["hit.distanceSq"] = (float)Math.Pow(MinimumInteractableDistance, 2) + .1f
+        });
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
-
         hudMock.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
 
     [Test]
-    public void it_does_not_change_crosshair_having_no_hit_info()
+    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_tool()
     {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "HitInfo", false },
-            { "holdingHarvest", true },
-            { "holdingRepair", false },
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifyNoOtherCalls();
-    }
-
-    [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_repair_tool()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "holdingRepair", true },
-            { "holdingHarvest", false },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "hit.distanceSq", MinimumInteractableDistance }
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
-    }
-
-    [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_harvest_tool()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "holdingHarvest", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "hit.distanceSq", MinimumInteractableDistance }
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
-    }
-
-    [Test]
-    public void it_disables_crosshair_having_no_interactable_in_distance()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = false, Times.Once);
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(InteractableInput));
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
 
     [Test]
     public void it_hides_the_crosshair_holding_a_non_interactable_item()
     {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(InteractableInput)
         {
-            { "HasHud", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "holdingRanged", false },
-            { "holdingHarvest", false },
-            { "holdingRepair", false },
-            { "holdingSalvage", false }
+            ["holdingToolTag"] = false
         });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = false, Times.Once);
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = false, Times.Once);
     }
 
     [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_holding_salvage_tool()
+    public void it_enables_crosshair_having_non_first_person_view()
     {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(InteractableInput)
         {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "holdingSalvage", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "hit.distanceSq", MinimumInteractableDistance }
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
-    }
-
-    [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_bare_hands_tool()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "holdingSalvage", false },
-            { "holdingBareHands", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "hit.distanceSq", MinimumInteractableDistance }
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
-    }
-
-    [Test]
-    public void it_enables_crosshair_having_non_first_person_view_and_holding_ranged_weapon()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
             { "HasFirstPersonView", false },
-            { "holdingRanged", true },
         });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
-    }
-
-    [Test]
-    public void it_enables_crosshair_having_an_interactable_in_distance_while_knife_tool()
-    {
-        var (playerLocal, hud) = Factory.Create(new Dictionary<string, object>
-        {
-            { "HasHud", true },
-            { "holdingRanged", false },
-            { "holdingSalvage", false },
-            { "holdingKnife", true },
-            { "HitInfo", true },
-            { "bHitValid", true },
-            { "hit.distanceSq", MinimumInteractableDistance }
-        });
-
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocal.Object);
-
-        hud.VerifySet(h => h.showCrosshair = true, Times.Once);
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
 }

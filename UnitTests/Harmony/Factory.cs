@@ -22,7 +22,7 @@ public static class Factory
         var hasHud = parameters.ContainsKey("HasHud") && (bool)parameters["HasHud"];
         var hasHitInfo = parameters.ContainsKey("HitInfo") && (bool)parameters["HitInfo"];
         var hasBHitValid = parameters.ContainsKey("bHitValid") && (bool)parameters["bHitValid"];
-        var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 1;
+        var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 99;
         var hasFirstPersonView =
             parameters.ContainsKey("HasFirstPersonView") ? (bool)parameters["HasFirstPersonView"] : true;
 
@@ -42,39 +42,11 @@ public static class Factory
 
         var actions = new List<IItemAction>();
 
-        var itemActionRanged = new Mock<IItemActionRanged>();
-        var holdingRanged = parameters.ContainsKey("holdingRanged") && (bool)parameters["holdingRanged"];
-        itemActionRanged.Setup(p => p.IsRanged).Returns(holdingRanged);
-        if (holdingRanged) actions.Add(itemActionRanged.Object);
-
-        var itemActionRepair = new Mock<IItemActionRepair>();
-        var holdingRepair = parameters.ContainsKey("holdingRepair") && (bool)parameters["holdingRepair"];
-        itemActionRepair.Setup(p => p.IsRepair).Returns(holdingRepair);
-        if (holdingRepair) actions.Add(itemActionRepair.Object);
-
-        var itemActionHarvest = new Mock<IItemActionHarvest>();
-        var holdingHarvest =
-            parameters.ContainsKey("holdingHarvest") && (bool)parameters["holdingHarvest"];
-        itemActionHarvest.Setup(p => p.IsHarvest).Returns(holdingHarvest);
-        if (holdingHarvest) actions.Add(itemActionHarvest.Object);
-
-        var itemActionSalvage = new Mock<IItemActionSalvage>();
-        var holdingSalvage =
-            parameters.ContainsKey("holdingSalvage") && (bool)parameters["holdingSalvage"];
-        itemActionSalvage.Setup(p => p.IsSalvage).Returns(holdingSalvage);
-        if (holdingSalvage) actions.Add(itemActionSalvage.Object);
-        
-        var itemActionKnife = new Mock<IItemActionBareHands>();
-        var holdingKnife =
-            parameters.ContainsKey("holdingKnife") && (bool)parameters["holdingKnife"];
-        itemActionKnife.Setup(p => p.IsKnife).Returns(holdingKnife);
-        if (holdingKnife) actions.Add(itemActionKnife.Object);
-
-        var itemActionBareHands = new Mock<IItemActionBareHands>();
-        var holdingBareHands =
-            parameters.ContainsKey("holdingBareHands") && (bool)parameters["holdingBareHands"];
-        itemActionBareHands.Setup(p => p.IsBareHands).Returns(holdingBareHands);
-        if (holdingBareHands) actions.Add(itemActionBareHands.Object);
+        var itemActionMock = new Mock<IItemAction>();
+        var holdingToolTag =
+            parameters.ContainsKey("holdingToolTag") && (bool)parameters["holdingToolTag"];
+        itemActionMock.Setup(p => p.IsTool).Returns(holdingToolTag);
+        if (holdingToolTag) actions.Add(itemActionMock.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
 

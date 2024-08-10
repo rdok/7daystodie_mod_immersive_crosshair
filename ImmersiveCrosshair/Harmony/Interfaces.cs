@@ -26,24 +26,12 @@ namespace ImmersiveCrosshair.Harmony
 
     public interface IItemAction
     {
-        bool IsRanged { get; }
-        bool IsRepair { get; }
-        bool IsHarvest { get; }
-        bool IsSalvage { get; }
-        bool IsBareHands { get; }
-        bool IsKnife { get; }
-        object GetType();
-        bool IsNull();
+        bool IsTool { get; }
     }
 
     public interface IItemClass
     {
         IItemAction[] Actions { get; }
-    }
-
-    public interface IHarmony
-    {
-        void PatchAll();
     }
 
     public interface IItemValue
@@ -59,25 +47,5 @@ namespace ImmersiveCrosshair.Harmony
     public interface IHitInfoDetails
     {
         float distanceSq { get; }
-    }
-
-    public interface IItemActionRanged : IItemAction
-    {
-    }
-
-    public interface IItemActionRepair : IItemAction
-    {
-    }
-
-    public interface IItemActionHarvest : IItemAction
-    {
-    }
-
-    public interface IItemActionSalvage : IItemAction
-    {
-    }
-    
-    public interface IItemActionBareHands : IItemAction
-    {
     }
 }

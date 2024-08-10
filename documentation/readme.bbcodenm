@@ -13,30 +13,36 @@
 [*] Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.3.1 - 10 Aug 2024[/size]
+[list]
+[*] fix: Shows the crosshair when holding any resource based tool instead of non-ranged weapons.
+[list]
+[*] Apparently there are ranged repair tools such as nail guns
+[*] Many thanks to [url=https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059]MrSamuelAdams1992[/url] for [url=https://www.nexusmods.com/7daystodie/mods/5601?tab=posts&jump_to_comment=142699761]reporting this issue[/url][/list][/list]
 [size=3]v1.3.0 - 08 Aug 2024[/size]
 [list]
-[*] Feature: shows crosshair when in third person view and holding a ranged weapon.
+[*] feat: shows crosshair when in third person view and holding a ranged weapon.
 [list]
 [*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/37992605]Khajits[/url] for identifying this issue.[/list]
-[*] Fix: shows crosshair holding a knife.
+[*] fix: shows crosshair holding a knife.
 [list]
 [*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/78780238]MrSamuelAdams1992[/url] for identifying this issue.[/list]
-[*] Feature: increased the interactable items distance by 4.6% as per popular request. [/list]
+[*] feat: increased the interactable items distance by 4.6% as per popular request. [/list]
 [size=3]v1.2.0 - 04 Aug 2024[/size]
 [list]
 [*] [url=https://www.nexusmods.com/7daystodie/articles/813]Hides crosshair when holding any ranged weapons.[/url]
-[*] Fix: enable crosshair having bare hands, or knuckles like tools.[/list]
+[*] fix: enable crosshair having bare hands, or knuckles like tools.[/list]
 [size=3]v1.1.1 - 04 Aug 2024[/size]
 [list]
-[*] Removes debug logs from production release[/list]
+[*] fix: Removes debug logs from production release[/list]
 [size=3]v1.1.0 - 03 Aug 2024[/size]
 [list]
-[*] Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
-[*] Hides crosshair when holding a melee weapon.[/list]
+[*] feat: Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
+[*] feat: Hides crosshair when holding a melee weapon.[/list]
 [size=3]v1.0.0 - 02 Aug 2024[/size]
 [list]
-[*] Activates the crosshair only when close enough to interact with an object.
-[*] Preserves the default behavior for ranged weapons.
+[*] feat: Activates the crosshair only when close enough to interact with an object.
+[*] feat: Preserves the default behavior for ranged weapons.
 [/list]
 [size=4]Sources[/size]
 [list]

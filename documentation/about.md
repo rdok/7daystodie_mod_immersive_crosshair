@@ -11,23 +11,27 @@
 - Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  
+#### v1.3.1 - 10 Aug 2024
+- fix: Shows the crosshair when holding any resource based tool instead of non-ranged weapons.
+  - Apparently there are ranged repair tools such as nail guns
+  - Many thanks to [MrSamuelAdams1992](https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059) for [reporting this issue](https://www.nexusmods.com/7daystodie/mods/5601?tab=posts&jump_to_comment=142699761)
 #### v1.3.0 - 08 Aug 2024
-- Feature: shows crosshair when in third person view and holding a ranged weapon.
+- feat: shows crosshair when in third person view and holding a ranged weapon.
     - Many thanks to [Khajits](https://www.nexusmods.com/7daystodie/users/37992605) for identifying this issue.
-- Fix: shows crosshair holding a knife.
+- fix: shows crosshair holding a knife.
     - Many thanks to [MrSamuelAdams1992 ](https://www.nexusmods.com/7daystodie/users/78780238) for identifying this issue.
-- Feature: increased the interactable items distance by 4.6% as per popular request. 
+- feat: increased the interactable items distance by 4.6% as per popular request. 
 #### v1.2.0 - 04 Aug 2024
 - [Hides crosshair when holding any ranged weapons.](https://www.nexusmods.com/7daystodie/articles/813)
-- Fix: enable crosshair having bare hands, or knuckles like tools.
+- fix: enable crosshair having bare hands, or knuckles like tools.
 #### v1.1.1 - 04 Aug 2024
-- Removes debug logs from production release
+- fix: Removes debug logs from production release
 #### v1.1.0 - 03 Aug 2024
-- Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
-- Hides crosshair when holding a melee weapon.
+- feat: Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
+- feat: Hides crosshair when holding a melee weapon.
 #### v1.0.0 - 02 Aug 2024
-- Activates the crosshair only when close enough to interact with an object.
-- Preserves the default behavior for ranged weapons.
+- feat: Activates the crosshair only when close enough to interact with an object.
+- feat: Preserves the default behavior for ranged weapons.
 
 ### Sources
 

@@ -67,6 +67,7 @@
     <ItemGroup>
         <Compile Include="Harmony\Factory.cs"/>
         <Compile Include="Harmony\ImmersiveCrosshairTests.cs"/>
+        <Compile Include="Harmony\InteractionPromptTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>

@@ -1,6 +1,9 @@
 using System;
 using System.Linq;
+using ImmersiveCrosshair.Harmony.Interfaces;
+using ImmersiveCrosshair.Harmony.Seams;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace ImmersiveCrosshair.Harmony
 {
@@ -48,6 +51,9 @@ namespace ImmersiveCrosshair.Harmony
             _logger.Info("Loading Patch: Failed to wrap NGuiWdwInGameHUD. Returning null.");
             return default;
         }
+
+        public XUi xui => _localPlayerUI.xui;
+        public IGUIWindowManager windowManager => new GUIWindowManagerSeam(_localPlayerUI.windowManager);
     }
 
     public class EntityPlayerLocalWrapper : IEntityPlayerLocal
@@ -93,6 +99,30 @@ namespace ImmersiveCrosshair.Harmony
 
         public bool bHitValid => _worldRayHitInfo.bHitValid;
         public IHitInfoDetails hit => new HitInfoDetailsWrapper(_worldRayHitInfo.hit);
+
+        public string tag
+        {
+            get => _worldRayHitInfo.tag;
+            set => _worldRayHitInfo.tag = value;
+        }
+
+        public HitInfoDetails fmcHit
+        {
+            get => _worldRayHitInfo.fmcHit;
+            set => _worldRayHitInfo.fmcHit = value;
+        }
+
+        public Transform transform
+        {
+            get => _worldRayHitInfo.transform;
+            set => _worldRayHitInfo.transform = value;
+        }
+
+        public Collider hitCollider
+        {
+            get => _worldRayHitInfo.hitCollider;
+            set => _worldRayHitInfo.hitCollider = value;
+        }
     }
 
     public class HitInfoDetailsWrapper : IHitInfoDetails

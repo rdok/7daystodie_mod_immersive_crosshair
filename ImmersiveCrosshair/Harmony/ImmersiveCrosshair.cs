@@ -22,7 +22,17 @@ namespace ImmersiveCrosshair.Harmony
             var hud = playerUI.GetComponentInChildren<IGuiWdwInGameHUD>();
 
             if (hud == null) return;
-
+            
+            var windowManager = playerUI.windowManager;
+            var interactionPromptID = XUiC_InteractionPrompt.ID;
+            var isInteractionPromptOpen = !string.IsNullOrEmpty(interactionPromptID) 
+                                          && windowManager.IsWindowOpen(interactionPromptID);
+            if (isInteractionPromptOpen)
+            {
+                hud.showCrosshair = true;
+                return;
+            }
+            
             var holdingItem = entityPlayerLocal.inventory.holdingItemItemValue;
             var actions = holdingItem?.ItemClass?.Actions;
 

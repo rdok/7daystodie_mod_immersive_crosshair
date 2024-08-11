@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveCrosshair</ModName>
-        <ModVersion>1.3.1</ModVersion>
+        <ModVersion>1.4.0</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
     </PropertyGroup>

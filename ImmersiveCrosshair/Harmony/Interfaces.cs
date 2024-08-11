@@ -1,8 +1,13 @@
+using ImmersiveCrosshair.Harmony.Interfaces;
+using UnityEngine;
+
 namespace ImmersiveCrosshair.Harmony
 {
     public interface ILocalPlayerUI
     {
         T GetComponentInChildren<T>();
+        XUi xui { get; }
+        IGUIWindowManager windowManager { get; }
     }
 
     public interface IEntityPlayerLocal
@@ -22,6 +27,10 @@ namespace ImmersiveCrosshair.Harmony
     {
         bool bHitValid { get; }
         IHitInfoDetails hit { get; }
+        string tag { get; set; }
+        HitInfoDetails fmcHit { get; set; }
+        Transform transform { get; set; }
+        Collider hitCollider { get; set; }
     }
 
     public interface IItemAction

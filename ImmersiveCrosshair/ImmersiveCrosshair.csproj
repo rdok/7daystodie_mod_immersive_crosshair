@@ -41,7 +41,9 @@
     <ItemGroup>
         <Compile Include="Harmony\Interfaces.cs"/>
         <Compile Include="Harmony\ImmersiveCrosshair.cs"/>
+        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs" />
         <Compile Include="Harmony\Logger.cs"/>
+        <Compile Include="Harmony\Seams\IGUIWindowManagerSeam.cs" />
         <Compile Include="Harmony\Wrappers.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
@@ -68,6 +70,9 @@
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
     </ItemGroup>
 

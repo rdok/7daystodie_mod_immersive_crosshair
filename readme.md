@@ -9,11 +9,10 @@
 [![Immersive Crosshairs Showcase](https://github.com/rdok/7daystodie_mod_immersive_crosshair/blob/main/documentation/showcase.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5601)
 
 ## Features
-- 7daystodie Version: 1.0 (b333)
-- Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 - This mod has been designed to work with [Dot Crosshair](https://www.nexusmods.com/7daystodie/mods/5640)
 - Shows crosshair only when holding a tool and hovering crosshair close to any interactable object.
 - Shows crosshair having the interaction prompted opened (interact with cars/doors/etc...), regardless of equipped tool or weapon.
+- Game Version: 1.0. Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  
 #### v1.4.0 - 11 Aug 2024

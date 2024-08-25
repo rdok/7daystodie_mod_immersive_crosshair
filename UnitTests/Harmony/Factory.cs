@@ -7,7 +7,7 @@ namespace UnitTests.Harmony;
 
 public static class Factory
 {
-    public static float MinimumInteractableDistance =
+    public const float MinimumInteractableDistance =
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.MinimumInteractableDistance;
 
     public static Dictionary<string, object> Input => new()
@@ -16,7 +16,10 @@ public static class Factory
         { "HitInfo", true },
         { "bHitValid", true },
         { "holdingToolTag", true },
-        { "hit.distanceSq", MinimumInteractableDistance }
+        { "hit.distanceSq", MinimumInteractableDistance },
+        { "BowsWithNoSightsSetting", false },
+        { "HasBowWithNoSights", false },
+        { "EnableCrosshairForToolSetting", false },
     };
 
     public static (Mock<IEntityPlayerLocal>, Mock<IGuiWdwInGameHUD>)
@@ -43,6 +46,9 @@ public static class Factory
             parameters.ContainsKey("HasInteractionPromptOpened")
                 ? (bool)parameters["HasInteractionPromptOpened"]
                 : false;
+        var bowsWithNoSightsSetting = (bool)parameters["BowsWithNoSightsSetting"];
+        var enableCrosshairForToolSetting = (bool)parameters["EnableCrosshairForToolSetting"];
+        var HasBowWithNoSights = (bool)parameters["HasBowWithNoSights"];
 
         XUiC_InteractionPrompt.ID = hasInteractionPromptOpened ? "lorem-ipsum" : "";
         windowManagerMock.Setup(p => p.IsWindowOpen(XUiC_InteractionPrompt.ID))
@@ -62,16 +68,18 @@ public static class Factory
         hit.Setup(p => p.distanceSq).Returns(distanceSq);
 
         var actions = new List<IItemAction>();
-
         var itemActionMock = new Mock<IItemAction>();
-        var holdingToolTag =
-            parameters.ContainsKey("holdingToolTag") && (bool)parameters["holdingToolTag"];
+        var holdingToolTag = (bool)parameters["holdingToolTag"];
         itemActionMock.Setup(p => p.IsTool).Returns(holdingToolTag);
-        if (holdingToolTag) actions.Add(itemActionMock.Object);
+        itemActionMock.Setup(p => p.HasBowWithNoSights).Returns(HasBowWithNoSights);
+        actions.Add(itemActionMock.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
 
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.SetLogger(logger.Object);
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.BowWithNoSightsSetting = bowsWithNoSightsSetting;
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.EnabledForToolsSetting = enableCrosshairForToolSetting;
+
 
         return (playerLocal, hudMock);
     }

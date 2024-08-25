@@ -5,9 +5,9 @@ namespace ImmersiveCrosshair.Harmony
 {
     public interface ILocalPlayerUI
     {
-        T GetComponentInChildren<T>();
         XUi xui { get; }
         IGUIWindowManager windowManager { get; }
+        T GetComponentInChildren<T>();
     }
 
     public interface IEntityPlayerLocal
@@ -36,8 +36,9 @@ namespace ImmersiveCrosshair.Harmony
     public interface IItemAction
     {
         bool IsTool { get; }
+        bool HasBowWithNoSights { get; }
     }
-
+    
     public interface IItemClass
     {
         IItemAction[] Actions { get; }

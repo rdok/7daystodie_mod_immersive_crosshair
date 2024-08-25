@@ -185,8 +185,8 @@ namespace ImmersiveCrosshair.Harmony
 
     public class ItemActionAdapter : IItemAction
     {
-        private readonly ItemAction _itemAction;
         private static readonly ILogger Logger = new Logger();
+        private readonly ItemAction _itemAction;
 
         public ItemActionAdapter(ItemAction itemAction)
         {
@@ -196,11 +196,8 @@ namespace ImmersiveCrosshair.Harmony
         bool IItemAction.IsTool =>
             HasTags(_itemAction, new[] { "tool", "harvestingSkill", "knife", "perkBrawler" }, TagCheckType.Any);
 
-        private enum TagCheckType
-        {
-            Any,
-            All
-        }
+        public bool HasBowWithNoSights => HasTags(_itemAction, new[] { "bow" }, TagCheckType.All) &&
+                                    _itemAction?.item?.Name != "gunBowT3CompoundBow";
 
         private static bool HasTags([CanBeNull] ItemAction _itemAction, string[] tagNames, TagCheckType checkType)
         {
@@ -214,16 +211,16 @@ namespace ImmersiveCrosshair.Harmony
 
             var tags = _itemAction.item.Properties.Values["Tags"];
             Logger.Info($"HasAnyTag: Item Tags: {tags}");
-
+            var tagsArray = tags.Split(',');
             bool hasTags;
 
             switch (checkType)
             {
                 case TagCheckType.Any:
-                    hasTags = tagNames.Any(tagName => tags.Contains(tagName));
+                    hasTags = tagNames.Any(tagName => tagsArray.Contains(tagName));
                     break;
                 case TagCheckType.All:
-                    hasTags = tagNames.All(tagName => tags.Contains(tagName));
+                    hasTags = tagNames.All(tagName => tagsArray.Contains(tagName));
                     break;
                 default:
                     Logger.Info("HasTags: Invalid check type");
@@ -235,6 +232,12 @@ namespace ImmersiveCrosshair.Harmony
                 : $"The item does not have {checkType.ToString().ToLower()} of the specified tags.");
 
             return hasTags;
+        }
+
+        private enum TagCheckType
+        {
+            Any,
+            All
         }
     }
 }

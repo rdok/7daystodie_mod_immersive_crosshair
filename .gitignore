@@ -7,3 +7,4 @@ ImmersiveCrosshair.sln.DotSettings.user
 node_modules/
 *7z
 dist/
+.env

@@ -6,8 +6,10 @@ namespace ImmersiveCrosshair.Harmony
 {
     public class ImmersiveCrosshair
     {
-        private static ILogger _logger = new Logger();
         public const float MinimumInteractableDistance = 2.4f;
+        private static ILogger _logger = new Logger();
+        public static bool BowWithNoSightsSetting { get; set; } = false;
+        public static bool EnabledForToolsSetting { get; set; } = false;
 
         public static void SetLogger(ILogger logger)
         {
@@ -22,21 +24,28 @@ namespace ImmersiveCrosshair.Harmony
             var hud = playerUI.GetComponentInChildren<IGuiWdwInGameHUD>();
 
             if (hud == null) return;
-            
+
             var windowManager = playerUI.windowManager;
             var interactionPromptID = XUiC_InteractionPrompt.ID;
-            var isInteractionPromptOpen = !string.IsNullOrEmpty(interactionPromptID) 
+            var isInteractionPromptOpen = !string.IsNullOrEmpty(interactionPromptID)
                                           && windowManager.IsWindowOpen(interactionPromptID);
             if (isInteractionPromptOpen)
             {
                 hud.showCrosshair = true;
                 return;
             }
-            
+
             var holdingItem = entityPlayerLocal.inventory.holdingItemItemValue;
             var actions = holdingItem?.ItemClass?.Actions;
 
             if (!entityPlayerLocal.bFirstPersonView)
+            {
+                hud.showCrosshair = true;
+                return;
+            }
+
+            var holdsBowWithNoSights = actions?.Any(action => action.HasBowWithNoSights) ?? false;
+            if (BowWithNoSightsSetting && holdsBowWithNoSights)
             {
                 hud.showCrosshair = true;
                 return;
@@ -50,6 +59,12 @@ namespace ImmersiveCrosshair.Harmony
                 return;
             }
 
+            if (EnabledForToolsSetting)
+            {
+                hud.showCrosshair = true;
+                return;
+            }
+
             var hitInfo = entityPlayerLocal.HitInfo;
 
             if (hitInfo == null) return;
@@ -60,18 +75,6 @@ namespace ImmersiveCrosshair.Harmony
             hud.showCrosshair = hasInteractable;
         }
 
-
-        public class Init : IModApi
-        {
-            public void InitMod(Mod modInstance)
-            {
-                var type = GetType();
-                var message = type.ToString();
-                _logger.Info("Loading Patch: " + message);
-                var harmony = new HarmonyLib.Harmony(message);
-                harmony.PatchAll();
-            }
-        }
 
         [HarmonyPatch(typeof(EntityPlayerLocal), "Update")]
         public static class Update

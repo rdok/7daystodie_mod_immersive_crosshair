@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace UnitTests.Harmony;
 
 [TestFixture]
-public class ImmersiveCrosshairInitTests
+public class ImmersiveCrosshairTests
 {
     [Test]
     public void it_does_not_change_crosshair_when_hud_is_not_loaded()
@@ -39,6 +39,19 @@ public class ImmersiveCrosshairInitTests
     }
 
     [Test]
+    public void it_enables_crosshair_while_holding_a_tool_and_enabled_setting()
+    {
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
+        {
+            ["HitInfo"] = false,
+            ["holdingToolTag"] = true,
+            ["EnableCrosshairForToolSetting"] = true
+        });
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
+
+    [Test]
     public void it_hides_the_crosshair_holding_a_non_interactable_item()
     {
         var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
@@ -54,9 +67,35 @@ public class ImmersiveCrosshairInitTests
     {
         var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
         {
-            { "HasFirstPersonView", false },
+            ["HasFirstPersonView"] = false
         });
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
         hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
+
+    [Test]
+    public void it_enables_crosshair_having_enabled_bows_with_no_sights_setting()
+    {
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
+        {
+            ["BowsWithNoSightsSetting"] = true,
+            ["HasBowWithNoSights"] = true,
+            ["holdingToolTag"] = false
+        });
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
+
+    [Test]
+    public void it_does_not_enable_crosshair_having_disabled_bows_with_no_sights_setting()
+    {
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
+        {
+            ["BowsWithNoSightsSetting"] = false,
+            ["HasBowWithNoSights"] = true,
+            ["holdingToolTag"] = false
+        });
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Never);
     }
 }

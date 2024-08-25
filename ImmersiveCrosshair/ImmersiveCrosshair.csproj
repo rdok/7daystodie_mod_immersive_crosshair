@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveCrosshair</ModName>
-        <ModVersion>1.4.0</ModVersion>
+        <ModVersion>1.6.0</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
     </PropertyGroup>
@@ -23,7 +23,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\ImmersiveCrosshair</OutputPath>
+        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\ZZZZ_ImmersiveCrosshair</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -39,17 +39,25 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Harmony\Init.cs"/>
         <Compile Include="Harmony\Interfaces.cs"/>
         <Compile Include="Harmony\ImmersiveCrosshair.cs"/>
-        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs" />
+        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
         <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\Seams\IGUIWindowManagerSeam.cs" />
+        <Compile Include="Harmony\Seams\IGUIWindowManagerSeam.cs"/>
         <Compile Include="Harmony\Wrappers.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="GearsAPI.dll"/>  
+        <Content Include="Config\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="ModInfo.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="ModSettings.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
@@ -63,16 +71,20 @@
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
             <Private>False</Private>
         </Reference>
+        <Reference Include="GearsAPI">
+            <HintPath>GearsAPI.dll</HintPath>
+        </Reference>
         <Reference Include="LogLibrary">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="UnityEngine.CoreModule">
+        <Reference Include="UnityEngine.CoreModule">  
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-            <Private>False</Private>
+            <Private>False</Private> 
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
-          <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+            <Private>False</Private>
         </Reference>
     </ItemGroup>
 
@@ -80,26 +92,19 @@
 
     <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release'">
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Name/@value" Value="$(ModName)"/>
-        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/DisplayName/@value" Value="$(ModDescription)"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/DisplayName/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Author/@value" Value="Rizarttt"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Description/@value" Value="$(ModDescription)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Version/@value" Value="$(ModVersion)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value" Value="https://www.nexusmods.com/7daystodie/mods/5601"/>
-         
+
         <Exec
-                Condition=" '$(Configuration)' != 'Debug' " 
+                Condition=" '$(Configuration)' != 'Debug' "
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
-                WorkingDirectory="$(MSBuildProjectDirectory)\.." 
+                WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
         <Exec Command="npm run generate_readme" WorkingDirectory="$(MSBuildProjectDirectory)\.."/>
 
     </Target>
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
 
 </Project>

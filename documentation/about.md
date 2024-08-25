@@ -3,17 +3,28 @@
 [![nexus-mods-collection-immersive-hud](https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla)](https://next.nexusmods.com/7daystodie/collections/epfqzi) [![nexus-mods-page](https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla)](https://www.nexusmods.com/7daystodie/mods/5601) [![github-repository](https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github)](https://github.com/rdok/7daystodie_mod_immersive_crosshair)
 
 > **Immersive Crosshair:** Crosshair when you need. Hide when you don't.  
-> **EAC Caveat:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
+> **EAC:** This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
 
 [![Immersive Crosshairs Showcase](https://github.com/rdok/7daystodie_mod_immersive_crosshair/blob/main/documentation/showcase.gif?raw=true)](https://www.nexusmods.com/7daystodie/mods/5601)
 
 ## Features
-- This mod has been designed to work with [Dot Crosshair](https://www.nexusmods.com/7daystodie/mods/5640)
-- Shows crosshair only when holding a tool and hovering crosshair close to any interactable object.
+- Shows crosshair only when holding a tool/hands and hovering crosshair close to any interactable object.
 - Shows crosshair having the interaction prompted opened (interact with cars/doors/etc...), regardless of equipped tool or weapon.
+- Gears mod settings integration supported. In game option to enable crosshair when:
+  - holding a bow with no sights.   
+  - holding any tool or using hands only.
+  - Requires [Gears](https://www.nexusmods.com/7daystodie/mods/4017) &  [Quartz](https://www.nexusmods.com/7daystodie/mods/2409/)
+  - For an example visit the [Videos tab](https://www.nexusmods.com/7daystodie/mods/5601?tab=videos#lg=2&slide=0).
+- This mod has been designed to work with [Dot Crosshair](https://www.nexusmods.com/7daystodie/mods/5640)
 - Game Version: 1.0. Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  
+#### v1.6.0 - 25 Aug 2024
+- feat: Optional [Gears](https://www.nexusmods.com/7daystodie/mods/4017) setting to enable crosshair when holding any tools or hands.
+#### v1.5.0 - 17 Aug 2024
+- feat: Add support for in game mod settings manager: [Gears](https://www.nexusmods.com/7daystodie/mods/4017)
+  - In game option to enable crosshair when holding a bow with no sights
+  - Translate to all in game supported languages
 #### v1.4.0 - 11 Aug 2024
 - feat: Show the crosshair having the interact prompt even when holding weapons. 
 #### v1.3.1 - 10 Aug 2024
@@ -37,8 +48,3 @@
 #### v1.0.0 - 02 Aug 2024
 - feat: Activates the crosshair only when close enough to interact with an object.
 - feat: Preserves the default behavior for ranged weapons.
-
-### Sources
-
-- [Harmony Patching](https://harmony.pardeike.net/articles/patching-postfix.html)
-- [devlooped/moq](https://github.com/devlooped/moq)

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModSettings>
+    <Global>
+        <Tab name="General">
+            <Category name="ImmersiveCrosshair" displayKey="immersiveCrosshairDisplayKey">
+                <Switch
+                        name="EnabledForBowsWithNoSights"
+                        displayKey="enabledForBowsWithNoSightsDisplayKey"
+                        tooltipKey="enabledForBowsWithNoSightsToolTipKey"
+                        defaultValue="false"
+                        leftValue="false"
+                        rightValue="true"
+                />
+                <Switch
+                        name="EnabledForTools"
+                        displayKey="enabledToolsDisplayKey"
+                        tooltipKey="enabledForToolsToolTipKey"
+                        defaultValue="false"
+                        leftValue="false"
+                        rightValue="true"
+                />
+            </Category>
+        </Tab>
+    </Global>
+</ModSettings>

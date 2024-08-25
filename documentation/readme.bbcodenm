@@ -22,9 +22,12 @@
 [*] Game Version: 1.0. Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
 [/list]
 [size=5]Changelog[/size]
+[size=3]v1.7.0 - 25 Aug 2024[/size]
+[list]
+[*] feat: Optional Gears setting to enable crosshair when holding any melee weapons.[/list]
 [size=3]v1.6.0 - 25 Aug 2024[/size]
 [list]
-[*] feat: Optional [url=https://www.nexusmods.com/7daystodie/mods/4017]Gears[/url] setting to enable crosshair when holding any tools or hands.[/list]
+[*] feat: Optional Gears setting to enable crosshair when holding any tools or hands.[/list]
 [size=3]v1.5.0 - 17 Aug 2024[/size]
 [list]
 [*] feat: Add support for in game mod settings manager: [url=https://www.nexusmods.com/7daystodie/mods/4017]Gears[/url]

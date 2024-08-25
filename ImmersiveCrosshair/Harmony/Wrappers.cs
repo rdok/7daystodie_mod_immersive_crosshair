@@ -196,8 +196,11 @@ namespace ImmersiveCrosshair.Harmony
         bool IItemAction.IsTool =>
             HasTags(_itemAction, new[] { "tool", "harvestingSkill", "knife", "perkBrawler" }, TagCheckType.Any);
 
+        bool IItemAction.IsMelee =>
+            HasTags(_itemAction, new[] { "meleeWeapon" }, TagCheckType.Any);
+
         public bool HasBowWithNoSights => HasTags(_itemAction, new[] { "bow" }, TagCheckType.All) &&
-                                    _itemAction?.item?.Name != "gunBowT3CompoundBow";
+                                          _itemAction?.item?.Name != "gunBowT3CompoundBow";
 
         private static bool HasTags([CanBeNull] ItemAction _itemAction, string[] tagNames, TagCheckType checkType)
         {

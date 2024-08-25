@@ -8,8 +8,9 @@ namespace ImmersiveCrosshair.Harmony
     {
         public const float MinimumInteractableDistance = 2.4f;
         private static ILogger _logger = new Logger();
-        public static bool BowWithNoSightsSetting { get; set; } = false;
-        public static bool EnabledForToolsSetting { get; set; } = false;
+        public static bool BowWithNoSightsSetting { get; set; }
+        public static bool EnabledForToolsSetting { get; set; }
+        public static bool EnabledForMeleeSetting { get; set; }
 
         public static void SetLogger(ILogger logger)
         {
@@ -51,14 +52,21 @@ namespace ImmersiveCrosshair.Harmony
                 return;
             }
 
-            var holdsInteractable = actions?.Any(action => action.IsTool) ?? false;
-
-            if (!holdsInteractable)
+            var holdsMelee = actions?.Any(action => action.IsMelee) ?? false;
+            if (holdsMelee && EnabledForMeleeSetting)
+            {
+                hud.showCrosshair = true;
+                return;
+            }
+            
+            var holdsTool = actions?.Any(action => action.IsTool) ?? false;
+            
+            if (!holdsTool)
             {
                 hud.showCrosshair = false;
                 return;
             }
-
+            
             if (EnabledForToolsSetting)
             {
                 hud.showCrosshair = true;

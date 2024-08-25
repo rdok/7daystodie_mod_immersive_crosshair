@@ -20,6 +20,8 @@ public static class Factory
         { "BowsWithNoSightsSetting", false },
         { "HasBowWithNoSights", false },
         { "EnableCrosshairForToolSetting", false },
+        { "EnableCrosshairForMeleeSetting", false },
+        
     };
 
     public static (Mock<IEntityPlayerLocal>, Mock<IGuiWdwInGameHUD>)
@@ -48,7 +50,8 @@ public static class Factory
                 : false;
         var bowsWithNoSightsSetting = (bool)parameters["BowsWithNoSightsSetting"];
         var enableCrosshairForToolSetting = (bool)parameters["EnableCrosshairForToolSetting"];
-        var HasBowWithNoSights = (bool)parameters["HasBowWithNoSights"];
+        var enableCrosshairForMeleeSetting = (bool)parameters["EnableCrosshairForMeleeSetting"];
+        var hasBowWithNoSights = (bool)parameters["HasBowWithNoSights"];
 
         XUiC_InteractionPrompt.ID = hasInteractionPromptOpened ? "lorem-ipsum" : "";
         windowManagerMock.Setup(p => p.IsWindowOpen(XUiC_InteractionPrompt.ID))
@@ -71,7 +74,8 @@ public static class Factory
         var itemActionMock = new Mock<IItemAction>();
         var holdingToolTag = (bool)parameters["holdingToolTag"];
         itemActionMock.Setup(p => p.IsTool).Returns(holdingToolTag);
-        itemActionMock.Setup(p => p.HasBowWithNoSights).Returns(HasBowWithNoSights);
+        itemActionMock.Setup(p => p.HasBowWithNoSights).Returns(hasBowWithNoSights);
+        itemActionMock.Setup(p => p.IsMelee).Returns(enableCrosshairForMeleeSetting);
         actions.Add(itemActionMock.Object);
 
         itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
@@ -79,6 +83,7 @@ public static class Factory
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.SetLogger(logger.Object);
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.BowWithNoSightsSetting = bowsWithNoSightsSetting;
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.EnabledForToolsSetting = enableCrosshairForToolSetting;
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.EnabledForMeleeSetting = enableCrosshairForMeleeSetting;
 
 
         return (playerLocal, hudMock);

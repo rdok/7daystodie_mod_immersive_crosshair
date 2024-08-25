@@ -50,6 +50,19 @@ public class ImmersiveCrosshairTests
         ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
         hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
     }
+    
+    [Test]
+    public void it_enables_crosshair_while_holding_a_melee_and_enabled_setting()
+    {
+        var (playerLocalMock, hudMock) = Factory.Create(new Dictionary<string, object>(Factory.Input)
+        {
+            ["HitInfo"] = false,
+            ["holdingToolTag"] = true,
+            ["EnableCrosshairForMeleeSetting"] = true
+        });
+        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.ApplyPatch(playerLocalMock.Object);
+        hudMock.VerifySet(h => h.showCrosshair = true, Times.Once);
+    }
 
     [Test]
     public void it_hides_the_crosshair_holding_a_non_interactable_item()

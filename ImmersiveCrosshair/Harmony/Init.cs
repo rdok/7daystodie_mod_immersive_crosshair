@@ -30,7 +30,13 @@ namespace ImmersiveCrosshair.Harmony
             enabledForTools.OnSettingChanged += EnabledForToolsChanged;
             EnabledForToolsChanged(enabledForTools,
                 (enabledForTools as IGlobalValueSetting)?.CurrentValue);
+            
+            var enabledForMeleeWeapons = category.GetSetting("EnabledForMeleeWeapons");
+            enabledForMeleeWeapons.OnSettingChanged += EnabledForMeleeWeaponsChanged;
+            EnabledForMeleeWeaponsChanged(enabledForMeleeWeapons,
+                (enabledForMeleeWeapons as IGlobalValueSetting)?.CurrentValue);
         }
+
 
         public void OnWorldSettingsLoaded(IModWorldSettings worldSettings)
         {
@@ -54,6 +60,12 @@ namespace ImmersiveCrosshair.Harmony
             Logger.Info($"setting.Name: {setting.Name}. New Value: {value}");
             bool.TryParse(value, out var toolsSetting);
             ImmersiveCrosshair.EnabledForToolsSetting = toolsSetting;
+        }
+        private static void EnabledForMeleeWeaponsChanged(IGlobalModSetting setting, string value)
+        {
+            Logger.Info($"setting.Name: {setting.Name}. New Value: {value}");
+            bool.TryParse(value, out var meleeSetting);
+            ImmersiveCrosshair.EnabledForMeleeSetting = meleeSetting;
         }
     }
 }

@@ -19,6 +19,14 @@
                         leftValue="false"
                         rightValue="true"
                 />
+                <Switch
+                        name="EnabledForMeleeWeapons"
+                        displayKey="enabledForMeleeDisplayKey"
+                        tooltipKey="enabledForMeleeToolTipKey"
+                        defaultValue="false"
+                        leftValue="false"
+                        rightValue="true"
+                />
             </Category>
         </Tab>
     </Global>

@@ -36,6 +36,7 @@ namespace ImmersiveCrosshair.Harmony
     public interface IItemAction
     {
         bool IsTool { get; }
+        bool IsMelee { get; }
         bool HasBowWithNoSights { get; }
     }
     

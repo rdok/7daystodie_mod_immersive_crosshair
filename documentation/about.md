@@ -10,13 +10,13 @@
 ## Features
 - Shows crosshair only when holding a tool/hands and hovering crosshair close to any interactable object.
 - Shows crosshair having the interaction prompted opened (interact with cars/doors/etc...), regardless of equipped tool or weapon.
-- Gears mod settings integration supported. In game option to optionally enable crosshair when:
+- Gears mod settings integration supported. In game options to optionally enable crosshair when:
   - wielding any bow with no sights.   
   - wielding any tool or using hands only.
   - wielding any melee weapon.
   - Requires [Gears](https://www.nexusmods.com/7daystodie/mods/4017) &  [Quartz](https://www.nexusmods.com/7daystodie/mods/2409/)
   - For an example visit the [Videos tab](https://www.nexusmods.com/7daystodie/mods/5601?tab=videos#lg=2&slide=0).
-- This mod has been designed to work with [Dot Crosshair](https://www.nexusmods.com/7daystodie/mods/5640)
+- This mod has been designed to optionally work with [Dot Crosshair](https://www.nexusmods.com/7daystodie/mods/5640)
 - Game Version: 1.0. Install with [Vortex](https://www.nexusmods.com/about/vortex/).
 
 ## Changelog  

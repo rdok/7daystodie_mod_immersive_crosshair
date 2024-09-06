@@ -4,7 +4,7 @@
 
 [quote]
 [b]Immersive Crosshair:[/b] Crosshair when you need. Hide when you don't.  
-[b]EAC:[/b] This mod uses custom code that is not compatible with Easy Anti-Cheat (EAC).
+[b]EAC:[/b] This mod uses custom code that is not compatible with Easy Anti-Cheat.
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/5601][img]https://github.com/rdok/7daystodie_mod_immersive_crosshair/blob/main/documentation/showcase.gif?raw=true[/img][/url]
 
@@ -21,51 +21,4 @@
 [*] For an example visit the [url=https://www.nexusmods.com/7daystodie/mods/5601?tab=videos#lg=2&slide=0]Videos tab[/url].[/list]
 [*] This mod has been designed to optionally work with [url=https://www.nexusmods.com/7daystodie/mods/5640]Dot Crosshair[/url]
 [*] Game Version: 1.0. Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
-[/list]
-[size=5]Changelog[/size]
-[size=3]v1.7.0 - 25 Aug 2024[/size]
-[list]
-[*] feat: Optional Gears setting to enable crosshair when holding any melee weapons.[/list]
-[size=3]v1.6.0 - 25 Aug 2024[/size]
-[list]
-[*] feat: Optional Gears setting to enable crosshair when holding any tools or hands.[/list]
-[size=3]v1.5.0 - 17 Aug 2024[/size]
-[list]
-[*] feat: Add support for in game mod settings manager: [url=https://www.nexusmods.com/7daystodie/mods/4017]Gears[/url]
-[list]
-[*] In game option to enable crosshair when holding a bow with no sights
-[*] Translate to all in game supported languages[/list][/list]
-[size=3]v1.4.0 - 11 Aug 2024[/size]
-[list]
-[*] feat: Show the crosshair having the interact prompt even when holding weapons. [/list]
-[size=3]v1.3.1 - 10 Aug 2024[/size]
-[list]
-[*] fix: Shows the crosshair when holding any resource based tool instead of non-ranged weapons.
-[list]
-[*] Apparently there are ranged repair tools such as nail guns
-[*] Many thanks to [url=https://next.nexusmods.com/profile/MrSamuelAdams1992/about-me?gameId=1059]MrSamuelAdams1992[/url] for [url=https://www.nexusmods.com/7daystodie/mods/5601?tab=posts&jump_to_comment=142699761]reporting this issue[/url][/list][/list]
-[size=3]v1.3.0 - 08 Aug 2024[/size]
-[list]
-[*] feat: shows crosshair when in third person view and holding a ranged weapon.
-[list]
-[*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/37992605]Khajits[/url] for identifying this issue.[/list]
-[*] fix: shows crosshair holding a knife.
-[list]
-[*] Many thanks to [url=https://www.nexusmods.com/7daystodie/users/78780238]MrSamuelAdams1992[/url] for identifying this issue.[/list]
-[*] feat: increased the interactable items distance by 4.6% as per popular request. [/list]
-[size=3]v1.2.0 - 04 Aug 2024[/size]
-[list]
-[*] [url=https://www.nexusmods.com/7daystodie/articles/813]Hides crosshair when holding any ranged weapons.[/url]
-[*] fix: enable crosshair having bare hands, or knuckles like tools.[/list]
-[size=3]v1.1.1 - 04 Aug 2024[/size]
-[list]
-[*] fix: Removes debug logs from production release[/list]
-[size=3]v1.1.0 - 03 Aug 2024[/size]
-[list]
-[*] feat: Activates the crosshair when the player is close to an object and points at it with a tool like an axe, hammer, wrench, or shovel.
-[*] feat: Hides crosshair when holding a melee weapon.[/list]
-[size=3]v1.0.0 - 02 Aug 2024[/size]
-[list]
-[*] feat: Activates the crosshair only when close enough to interact with an object.
-[*] feat: Preserves the default behavior for ranged weapons.
 [/list]

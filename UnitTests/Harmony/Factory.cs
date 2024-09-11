@@ -7,85 +7,64 @@ namespace UnitTests.Harmony;
 
 public static class Factory
 {
-    public const float MinimumInteractableDistance =
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.MinimumInteractableDistance;
-
     public static Dictionary<string, object> Input => new()
     {
         { "HasHud", true },
-        { "HitInfo", true },
         { "bHitValid", true },
-        { "holdingToolTag", true },
-        { "hit.distanceSq", MinimumInteractableDistance },
-        { "BowsWithNoSightsSetting", false },
-        { "HasBowWithNoSights", false },
-        { "EnableCrosshairForToolSetting", false },
-        { "EnableCrosshairForMeleeSetting", false },
-        
+        { "HoldsTool", true },
+        { "HoldsBowWithNoSights", false },
+        { "HoldsMelee", false },
+        { "ToolSetting", "dynamic" },
+        { "RangedWeaponSettings", "static" },
+        { "MeleeSetting", "dynamic" },
+        { "BowSetting", "static" },
+        { "HasFirstPersonView", true },
+        { "HasInteractionPromptOpened", false }
     };
 
-    public static (Mock<IEntityPlayerLocal>, Mock<IGuiWdwInGameHUD>)
+    public static (GuiDrawCrosshair, Mock<IEntityPlayerLocal> entityPlayerLocalMock, Mock<IItemAction> itemActionMock,
+        Mock<IWorldRayHitInfo> worldRayHitInfoMock, Mock<INGuiWdwInGameHUD>)
         Create(Dictionary<string, object> parameters)
     {
-        var playerUI = new Mock<ILocalPlayerUI>();
-        var hudMock = new Mock<IGuiWdwInGameHUD>();
-        var hitInfo = new Mock<IWorldRayHitInfo>();
-        var playerLocal = new Mock<IEntityPlayerLocal>();
+        var localPlayerUIMock = new Mock<ILocalPlayerUI>();
+        var hudMock = new Mock<INGuiWdwInGameHUD>();
+        var worldRayHitInfoMock = new Mock<IWorldRayHitInfo>();
+        var entityPlayerLocalMock = new Mock<IEntityPlayerLocal>();
         var inventory = new Mock<ImmersiveCrosshair.Harmony.IInventory>();
         var itemClassMock = new Mock<IItemClass>();
-        var hit = new Mock<IHitInfoDetails>();
         var holdingItemItemValue = new Mock<IItemValue>();
-        var logger = new Mock<ILogger>();
+        var loggerMock = new Mock<ILogger>();
         var windowManagerMock = new Mock<IGUIWindowManager>();
+        var modSettings = new Mock<IModSettings>();
 
-        var hasHud = parameters.ContainsKey("HasHud") && (bool)parameters["HasHud"];
-        var hasHitInfo = parameters.ContainsKey("HitInfo") && (bool)parameters["HitInfo"];
-        var hasBHitValid = parameters.ContainsKey("bHitValid") && (bool)parameters["bHitValid"];
-        var distanceSq = parameters.ContainsKey("hit.distanceSq") ? (float)parameters["hit.distanceSq"] : 99;
-        var hasFirstPersonView =
-            parameters.ContainsKey("HasFirstPersonView") ? (bool)parameters["HasFirstPersonView"] : true;
-        var hasInteractionPromptOpened =
-            parameters.ContainsKey("HasInteractionPromptOpened")
-                ? (bool)parameters["HasInteractionPromptOpened"]
-                : false;
-        var bowsWithNoSightsSetting = (bool)parameters["BowsWithNoSightsSetting"];
-        var enableCrosshairForToolSetting = (bool)parameters["EnableCrosshairForToolSetting"];
-        var enableCrosshairForMeleeSetting = (bool)parameters["EnableCrosshairForMeleeSetting"];
-        var hasBowWithNoSights = (bool)parameters["HasBowWithNoSights"];
+        var hasHud = (bool)parameters["HasHud"];
+        var hasFirstPersonView = (bool)parameters["HasFirstPersonView"];
+        var hasInteractionPromptOpened = (bool)parameters["HasInteractionPromptOpened"];
 
         XUiC_InteractionPrompt.ID = hasInteractionPromptOpened ? "lorem-ipsum" : "";
         windowManagerMock.Setup(p => p.IsWindowOpen(XUiC_InteractionPrompt.ID))
             .Returns(hasInteractionPromptOpened);
+        modSettings.Setup(p => p.ToolsSetting).Returns((string)parameters["ToolSetting"]);
+        modSettings.Setup(p => p.MeleeWeaponsSetting).Returns((string)parameters["MeleeSetting"]);
+        modSettings.Setup(p => p.BowsSetting).Returns((string)parameters["BowSetting"]);
+        modSettings.Setup(p => p.RangedWeaponsSetting).Returns((string)parameters["RangedWeaponSettings"]);
         holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
         inventory.Setup(p => p.holdingItemItemValue).Returns(holdingItemItemValue.Object);
-        playerUI.Setup(p => p.GetComponentInChildren<IGuiWdwInGameHUD>())
+        localPlayerUIMock.Setup(p => p.GetComponentInChildren<INGuiWdwInGameHUD>())
             .Returns(hasHud ? hudMock.Object : null);
-        playerUI.Setup(p => p.windowManager).Returns(windowManagerMock.Object);
-        playerLocal.Setup(p => p.playerUI).Returns(playerUI.Object);
-        playerLocal.Setup(p => p.inventory).Returns(inventory.Object);
-        playerLocal.Setup(p => p.HitInfo)
-            .Returns(hasHitInfo ? hitInfo.Object : null);
-        playerLocal.Setup(p => p.bFirstPersonView).Returns(hasFirstPersonView);
-        hitInfo.Setup(p => p.bHitValid).Returns(hasBHitValid);
-        hitInfo.Setup(p => p.hit).Returns(hit.Object);
-        hit.Setup(p => p.distanceSq).Returns(distanceSq);
+        localPlayerUIMock.Setup(p => p.windowManager).Returns(windowManagerMock.Object);
+        entityPlayerLocalMock.Setup(p => p.playerUI).Returns(localPlayerUIMock.Object);
+        entityPlayerLocalMock.Setup(p => p.inventory).Returns(inventory.Object);
+        entityPlayerLocalMock.Setup(p => p.bFirstPersonView).Returns(hasFirstPersonView);
+        worldRayHitInfoMock.Setup(p => p.bHitValid).Returns((bool)parameters["bHitValid"]);
 
-        var actions = new List<IItemAction>();
         var itemActionMock = new Mock<IItemAction>();
-        var holdingToolTag = (bool)parameters["holdingToolTag"];
-        itemActionMock.Setup(p => p.IsTool).Returns(holdingToolTag);
-        itemActionMock.Setup(p => p.HasBowWithNoSights).Returns(hasBowWithNoSights);
-        itemActionMock.Setup(p => p.IsMelee).Returns(enableCrosshairForMeleeSetting);
-        actions.Add(itemActionMock.Object);
+        itemActionMock.Setup(p => p.IsTool).Returns((bool)parameters["HoldsTool"]);
+        itemActionMock.Setup(p => p.IsBowWithNoSights).Returns((bool)parameters["HoldsBowWithNoSights"]);
+        itemActionMock.Setup(p => p.IsMelee).Returns((bool)parameters["HoldsMelee"]);
 
-        itemClassMock.Setup(p => p.Actions).Returns(actions.ToArray());
+        var guiDrawCrosshair = new GuiDrawCrosshair(loggerMock.Object, modSettings.Object);
 
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.SetLogger(logger.Object);
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.BowWithNoSightsSetting = bowsWithNoSightsSetting;
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.EnabledForToolsSetting = enableCrosshairForToolSetting;
-        ImmersiveCrosshair.Harmony.ImmersiveCrosshair.EnabledForMeleeSetting = enableCrosshairForMeleeSetting;
-
-
-        return (playerLocal, hudMock);
+        return (guiDrawCrosshair, entityPlayerLocalMock, itemActionMock, worldRayHitInfoMock, hudMock);
     }
 }

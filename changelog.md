@@ -1,5 +1,14 @@
 ## Changelog
 
+#### 1.8.0 - 11 Aug 2024
+
+- feat: Mod can now be customized using `ModSettings.xml` for users that are unable to use [Gears](https://www.nexusmods.com/7daystodie/mods/4017) & [Quartz](https://www.nexusmods.com/7daystodie/mods/2409/). [As per discussion.](https://www.nexusmods.com/7daystodie/mods/5640?tab=posts&jump_to_comment=143710005&BH=0)
+- feat: New Tool setting: off, static, dynamic
+- feat: New Melee setting: off, static, dynamic
+- feat: New Bow setting: off, static
+- feat: Ranged Weapons setting: off, static
+- feat: Use game's native collider for detecting the precise interactable distance.
+
 #### 1.7.0 - 25 Aug 2024
 
 - feat: Optional Gears setting to enable crosshair when holding any melee weapons.

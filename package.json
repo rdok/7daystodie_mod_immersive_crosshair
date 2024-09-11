@@ -19,7 +19,6 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "translate:localization": "node scripts/translate_localization.js",
-    "update:dependencies": "npm-check -u",
     "generate_readme": "node scripts/generate_readme.js",
     "generate_readme:watch": "nodemon --watch documentation -e md scripts/generate_readme.js"
   },

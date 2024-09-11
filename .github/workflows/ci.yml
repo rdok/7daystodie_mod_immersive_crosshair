@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, "release/1.8.0-settings-without-gears" ]
+  pull_request:
+    branches: [ main, "release/1.8.0-settings-without-gears" ]
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add NuGet private feed
+        run: nuget sources Add -Name "GitHubPackages" -Source "https://nuget.pkg.github.com/rdok/index.json" -Username "rdok" -Password "${{ secrets.NUGET_API_KEY }}"
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build solution
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=CI CustomMusic.sln
+
+      - name: Install NUnit.ConsoleRunner 3.18.1
+        run: nuget install NUnit.ConsoleRunner -Version 3.18.1 -DirectDownload -OutputDirectory UnitTests/bin/CI
+
+      - name: Run UnitTests
+        run: UnitTests/bin/CI/NUnit.ConsoleRunner.3.18.1/tools/nunit3-console.exe UnitTests/bin/CI/UnitTests.dll

@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main, "release/1.8.0-settings-without-gears" ]
 
+env:
+  SOLUTION_NAME: ImmersiveCrosshair.sln
+
 jobs:
   unit-tests:
     name: Unit Tests
@@ -22,7 +25,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build solution
-        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=CI CustomMusic.sln
+        run: msbuild -t:build -restore -p:RestorePackagesConfig=true -p:Configuration=CI ${{ env.SOLUTION_NAME }}
 
       - name: Install NUnit.ConsoleRunner 3.18.1
         run: nuget install NUnit.ConsoleRunner -Version 3.18.1 -DirectDownload -OutputDirectory UnitTests/bin/CI

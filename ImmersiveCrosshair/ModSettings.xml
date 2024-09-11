@@ -3,16 +3,36 @@
     <Global>
         <Tab name="General">
             <Category name="ImmersiveCrosshair" displayKey="immersiveCrosshairDisplayKey">
-                <Selector name="Tools" displayKey="toolDisplayKey" defaultValue="dynamic">
+                <Selector
+                        name="Tools"
+                        displayKey="toolDisplayKey"
+                        tooltipKey="toolTooltipKey"
+                        defaultValue="dynamic"
+                >
                     <Property type="arrayValues" allowedValues="off,static,dynamic"/>
                 </Selector>
-                <Selector name="MeleeWeapons" displayKey="meleeWeaponsDisplayKey" defaultValue="static">
+                <Selector
+                        name="MeleeWeapons"
+                        displayKey="meleeWeaponsDisplayKey"
+                        tooltipKey="meleeWeaponsTooltipKey"
+                        defaultValue="static"
+                >
                     <Property type="arrayValues" allowedValues="off,static,dynamic"/>
                 </Selector>
-                <Selector name="Bows" displayKey="bowsDisplayKey" defaultValue="static">
+                <Selector
+                        name="Bows"
+                        displayKey="bowsDisplayKey"
+                        defaultValue="static"
+                        tooltipKey="bowsTooltipKey"
+                >
                     <Property type="arrayValues" allowedValues="off,static"/>
                 </Selector>
-                <Selector name="RangedWeapons" displayKey="rangedWeaponsDisplayKey" defaultValue="off">
+                <Selector
+                        name="RangedWeapons"
+                        displayKey="rangedWeaponsDisplayKey"
+                        defaultValue="off"
+                        tooltipKey="rangedWeaponsTooltipKey"
+                >
                     <Property type="arrayValues" allowedValues="off,static"/>
                 </Selector>
             </Category>

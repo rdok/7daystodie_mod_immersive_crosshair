@@ -39,18 +39,33 @@
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Harmony\Init.cs"/>
-        <Compile Include="Harmony\Interfaces.cs"/>
-        <Compile Include="Harmony\ImmersiveCrosshair.cs"/>
-        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
-        <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\Seams\IGUIWindowManagerSeam.cs"/>
-        <Compile Include="Harmony\Wrappers.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Harmony\Adapters\EntityPlayerLocalAdapter.cs" />
+        <Compile Include="Harmony\Adapters\HitInfoDetailsAdapter.cs" />
+        <Compile Include="Harmony\Adapters\IGUIWindowManager.cs" />
+        <Compile Include="Harmony\Adapters\IGUIWindowManagerSeam.cs" />
+        <Compile Include="Harmony\Adapters\Interfaces.cs" />
+        <Compile Include="Harmony\Adapters\NInGuiWdwInGameHUDAdapter.cs" />
+        <Compile Include="Harmony\Adapters\InventoryAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemActionAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemClassAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemValueAdapter.cs" />
+        <Compile Include="Harmony\Adapters\LocalPlayerUIAdapter.cs" />
+        <Compile Include="Harmony\Adapters\WorldHitInfoAdapter.cs" />
+        <Compile Include="Harmony\IGuiDrawCrosshair.cs" />
+        <Compile Include="Harmony\ILogger.cs" />
+        <Compile Include="Harmony\IModSettings.cs" />
+        <Compile Include="Harmony\ItemActionRangedPatch.cs" />
+        <Compile Include="Harmony\Main.cs" />
+        <Compile Include="Harmony\GuiDrawCrosshair.cs" />
+        <Compile Include="Harmony\ItemActionDynamicPatch.cs" />
+        <Compile Include="Harmony\Logger.cs" />
+        <Compile Include="Harmony\ModSettings.cs" />
+        <Compile Include="Harmony\Services.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="GearsAPI.dll"/>  
+        <Content Include="GearsAPI.dll" />  
         <Content Include="Config\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -84,6 +99,14 @@
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
             <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml.Linq">
+            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\System.Xml.Linq.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml">
+            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\System.Xml.dll</HintPath>
             <Private>False</Private>
         </Reference>
     </ItemGroup>

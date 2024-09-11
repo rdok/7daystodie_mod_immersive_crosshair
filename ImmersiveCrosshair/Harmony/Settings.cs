@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace ImmersiveCrosshair.Harmony
 {
-    public class ModSettings : IModSettings
+    public class Settings : ISettings
     {
         private readonly ILogger _logger;
         private XDocument _settingsXml;
@@ -14,7 +14,7 @@ namespace ImmersiveCrosshair.Harmony
         public string BowsSetting { get; set; }
         public string RangedWeaponsSetting { get; set; }
 
-        public ModSettings(Logger logger)
+        public Settings(Logger logger)
         {
             _logger = logger;
 

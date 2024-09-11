@@ -53,13 +53,13 @@
         <Compile Include="Harmony\Adapters\WorldHitInfoAdapter.cs" />
         <Compile Include="Harmony\IGuiDrawCrosshair.cs" />
         <Compile Include="Harmony\ILogger.cs" />
-        <Compile Include="Harmony\IModSettings.cs" />
+        <Compile Include="Harmony\ISettings.cs" />
         <Compile Include="Harmony\ItemActionRangedPatch.cs" />
         <Compile Include="Harmony\Main.cs" />
         <Compile Include="Harmony\GuiDrawCrosshair.cs" />
         <Compile Include="Harmony\ItemActionDynamicPatch.cs" />
         <Compile Include="Harmony\Logger.cs" />
-        <Compile Include="Harmony\ModSettings.cs" />
+        <Compile Include="Harmony\Settings.cs" />
         <Compile Include="Harmony\Services.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

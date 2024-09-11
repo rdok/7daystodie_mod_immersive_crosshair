@@ -35,7 +35,7 @@ public static class Factory
         var holdingItemItemValue = new Mock<IItemValue>();
         var loggerMock = new Mock<ILogger>();
         var windowManagerMock = new Mock<IGUIWindowManager>();
-        var modSettings = new Mock<IModSettings>();
+        var settings = new Mock<ISettings>();
 
         var hasHud = (bool)parameters["HasHud"];
         var hasFirstPersonView = (bool)parameters["HasFirstPersonView"];
@@ -44,10 +44,10 @@ public static class Factory
         XUiC_InteractionPrompt.ID = hasInteractionPromptOpened ? "lorem-ipsum" : "";
         windowManagerMock.Setup(p => p.IsWindowOpen(XUiC_InteractionPrompt.ID))
             .Returns(hasInteractionPromptOpened);
-        modSettings.Setup(p => p.ToolsSetting).Returns((string)parameters["ToolSetting"]);
-        modSettings.Setup(p => p.MeleeWeaponsSetting).Returns((string)parameters["MeleeSetting"]);
-        modSettings.Setup(p => p.BowsSetting).Returns((string)parameters["BowSetting"]);
-        modSettings.Setup(p => p.RangedWeaponsSetting).Returns((string)parameters["RangedWeaponSettings"]);
+        settings.Setup(p => p.ToolsSetting).Returns((string)parameters["ToolSetting"]);
+        settings.Setup(p => p.MeleeWeaponsSetting).Returns((string)parameters["MeleeSetting"]);
+        settings.Setup(p => p.BowsSetting).Returns((string)parameters["BowSetting"]);
+        settings.Setup(p => p.RangedWeaponsSetting).Returns((string)parameters["RangedWeaponSettings"]);
         holdingItemItemValue.Setup(p => p.ItemClass).Returns(itemClassMock.Object);
         inventory.Setup(p => p.holdingItemItemValue).Returns(holdingItemItemValue.Object);
         localPlayerUIMock.Setup(p => p.GetComponentInChildren<INGuiWdwInGameHUD>())
@@ -63,7 +63,7 @@ public static class Factory
         itemActionMock.Setup(p => p.IsBowWithNoSights).Returns((bool)parameters["HoldsBowWithNoSights"]);
         itemActionMock.Setup(p => p.IsMelee).Returns((bool)parameters["HoldsMelee"]);
 
-        var guiDrawCrosshair = new GuiDrawCrosshair(loggerMock.Object, modSettings.Object);
+        var guiDrawCrosshair = new GuiDrawCrosshair(loggerMock.Object, settings.Object);
 
         return (guiDrawCrosshair, entityPlayerLocalMock, itemActionMock, worldRayHitInfoMock, hudMock);
     }

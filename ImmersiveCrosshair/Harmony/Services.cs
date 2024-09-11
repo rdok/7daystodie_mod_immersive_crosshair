@@ -26,9 +26,11 @@ namespace ImmersiveCrosshair.Harmony
         public static void Initialise()
         {
             var logger = new Logger();
-            var modSettings = new ModSettings(logger);
+            var settings = new Settings(logger);
 
-            Add<IGuiDrawCrosshair>(args => new GuiDrawCrosshair(logger, modSettings));
+            Add<ILogger>(args => new Logger());
+            Add<IGuiDrawCrosshair>(args => new GuiDrawCrosshair(logger, settings));
+            Add<ISettings>(args => new Settings(logger));
         }
     }
 }

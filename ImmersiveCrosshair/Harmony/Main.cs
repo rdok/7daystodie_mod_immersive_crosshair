@@ -9,12 +9,12 @@ namespace ImmersiveCrosshair.Harmony
     {
         public static IGearsMod gearsMod;
         private static ILogger _logger;
-        private static IModSettings _modSettings;
+        private static ISettings _settings;
 
         public Main()
         {
             Services.Initialise();
-            _modSettings = Services.Get<IModSettings>();
+            _settings = Services.Get<ISettings>();
             _logger = Services.Get<ILogger>();
         }
 
@@ -23,9 +23,9 @@ namespace ImmersiveCrosshair.Harmony
             gearsMod = modInstance;
         }
 
-        public void OnGlobalSettingsLoaded(IModGlobalSettings modSettings)
+        public void OnGlobalSettingsLoaded(IModGlobalSettings modGlobalSettings)
         {
-            var generalTab = modSettings.GetTab("General");
+            var generalTab = modGlobalSettings.GetTab("General");
             var category = generalTab.GetCategory("ImmersiveCrosshair");
 
             var toolsSetting = category.GetSetting("Tools");
@@ -51,28 +51,28 @@ namespace ImmersiveCrosshair.Harmony
             harmony.PatchAll();
         }
 
-        private static void ToolsSettingChanged(IGlobalModSetting setting, string value)
+        private static void ToolsSettingChanged(IGlobalModSetting globalModSetting, string value)
         {
-            _logger.Debug($"setting.Name: {setting.Name}. New Value: {value}");
-            _modSettings.ToolsSetting = value;
+            _logger.Debug($"setting.Name: {globalModSetting.Name}. New Value: {value}");
+            _settings.ToolsSetting = value;
         }
 
-        private static void MeleeWeaponsSettingChanged(IGlobalModSetting setting, string value)
+        private static void MeleeWeaponsSettingChanged(IGlobalModSetting globalModSetting, string value)
         {
-            _logger.Debug($"setting.Name: {setting.Name}. New Value: {value}");
-            _modSettings.MeleeWeaponsSetting = value;
+            _logger.Debug($"setting.Name: {globalModSetting.Name}. New Value: {value}");
+            _settings.MeleeWeaponsSetting = value;
         }
 
-        private static void BowsSettingChanged(IGlobalModSetting setting, string value)
+        private static void BowsSettingChanged(IGlobalModSetting globalModSetting, string value)
         {
-            _logger.Debug($"setting.Name: {setting.Name}. New Value: {value}");
-            _modSettings.BowsSetting = value;
+            _logger.Debug($"setting.Name: {globalModSetting.Name}. New Value: {value}");
+            _settings.BowsSetting = value;
         }
 
-        private static void RangedWeaponsSettingChanged(IGlobalModSetting setting, string value)
+        private static void RangedWeaponsSettingChanged(IGlobalModSetting globalModSetting, string value)
         {
-            _logger.Debug($"setting.Name: {setting.Name}. New Value: {value}");
-            _modSettings.RangedWeaponsSetting = value;
+            _logger.Debug($"setting.Name: {globalModSetting.Name}. New Value: {value}");
+            _settings.RangedWeaponsSetting = value;
         }
     }
 }

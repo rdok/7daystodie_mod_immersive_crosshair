@@ -3,12 +3,12 @@
     public class GuiDrawCrosshair : IGuiDrawCrosshair
     {
         private readonly ILogger _logger;
-        private readonly IModSettings _modSettings;
+        private readonly ISettings _settings;
 
-        public GuiDrawCrosshair(ILogger logger, IModSettings modSettings)
+        public GuiDrawCrosshair(ILogger logger, ISettings settings)
         {
             _logger = logger;
-            _modSettings = modSettings;
+            _settings = settings;
         }
 
         public void Update(
@@ -61,7 +61,7 @@
                 return;
             }
 
-            if (_modSettings.RangedWeaponsSetting == "off")
+            if (_settings.RangedWeaponsSetting == "off")
             {
                 hud.showCrosshair = false;
                 return;
@@ -74,13 +74,13 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
-            if (_modSettings.BowsSetting == "off")
+            if (_settings.BowsSetting == "off")
             {
                 hud.showCrosshair = false;
                 return;
             }
 
-            if (_modSettings.BowsSetting == "static")
+            if (_settings.BowsSetting == "static")
             {
                 hud.showCrosshair = true;
                 return;
@@ -93,13 +93,13 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
-            if (_modSettings.MeleeWeaponsSetting == "off")
+            if (_settings.MeleeWeaponsSetting == "off")
             {
                 hud.showCrosshair = false;
                 return;
             }
 
-            if (_modSettings.MeleeWeaponsSetting == "static")
+            if (_settings.MeleeWeaponsSetting == "static")
             {
                 hud.showCrosshair = true;
                 return;
@@ -112,13 +112,13 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
-            if (_modSettings.ToolsSetting == "off")
+            if (_settings.ToolsSetting == "off")
             {
                 hud.showCrosshair = false;
                 return;
             }
 
-            if (_modSettings.ToolsSetting == "static")
+            if (_settings.ToolsSetting == "static")
             {
                 hud.showCrosshair = true;
                 return;

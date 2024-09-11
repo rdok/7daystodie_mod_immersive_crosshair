@@ -1,6 +1,6 @@
 namespace ImmersiveCrosshair.Harmony
 {
-    public interface IModSettings
+    public interface ISettings
     {
         string ToolsSetting { get; set; }
         string MeleeWeaponsSetting { get; set; }

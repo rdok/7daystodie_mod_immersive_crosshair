@@ -70,7 +70,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="GearsAPI.dll" />  
+        <Content Include="GearsAPI.dll" />
+        <Reference Include="GearsAPI">
+            <HintPath>GearsAPI.dll</HintPath>
+        </Reference>
         <Content Include="Config\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -82,13 +85,10 @@
         </Content>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
         <Reference Include="0Harmony">
             <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
             <Private>False</Private>
-        </Reference>
-        <Reference Include="GearsAPI">
-            <HintPath>GearsAPI.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>

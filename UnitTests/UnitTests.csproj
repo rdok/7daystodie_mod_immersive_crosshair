@@ -50,10 +50,10 @@
     </ItemGroup>
     
     <ItemGroup Condition="'$(Configuration)' == 'CI'">
-        <PackageReference Include="7dtd_nuget" Version="1.0.24"/>
+        <PackageReference Include="7dtd_nuget" Version="1.0.25" />
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
         <Reference Include="mscorlib"/>
         <Reference Include="System"/>
         <Reference Include="System.ComponentModel.DataAnnotations"/>
@@ -83,6 +83,7 @@
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
         </Reference>
     </ItemGroup>
+    
     <ItemGroup>
         <Compile Include="Harmony\Factory.cs"/>
         <Compile Include="Harmony\GuiDrawCrosshairPatchTests.cs"/>

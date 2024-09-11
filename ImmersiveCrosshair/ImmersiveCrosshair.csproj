@@ -40,10 +40,25 @@
         <WarningLevel>3</WarningLevel>
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
+    
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
       <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
+    
     <ItemGroup>
+        <Content Include="GearsAPI.dll" />
+        <Reference Include="GearsAPI">
+            <HintPath>GearsAPI.dll</HintPath>
+        </Reference>
+        <Content Include="Config\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="ModInfo.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="ModSettings.xml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Compile Include="Harmony\Adapters\EntityPlayerLocalAdapter.cs" />
         <Compile Include="Harmony\Adapters\HitInfoDetailsAdapter.cs" />
         <Compile Include="Harmony\Adapters\IGUIWindowManager.cs" />
@@ -69,21 +84,6 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="GearsAPI.dll" />
-        <Reference Include="GearsAPI">
-            <HintPath>GearsAPI.dll</HintPath>
-        </Reference>
-        <Content Include="Config\**\*">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="ModInfo.xml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="ModSettings.xml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
 
     <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
         <Reference Include="0Harmony">
@@ -114,6 +114,10 @@
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
             <Private>False</Private>
         </Reference>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(Configuration)' == 'CI'">
+        <PackageReference Include="7dtd_nuget" Version="1.0.23"/>
     </ItemGroup>
     
     <Target Name="BeforeBuild">

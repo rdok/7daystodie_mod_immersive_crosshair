@@ -14,32 +14,25 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>12</LangVersion>
-        <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
-        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
+        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>bin\Debug\</OutputPath>
     </PropertyGroup>
+
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
         <OutputPath>bin\CI\</OutputPath>
     </PropertyGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+
     <ItemGroup>
         <ProjectReference Include="..\ImmersiveCrosshair\ImmersiveCrosshair.csproj">
             <Project>{90a1b09c-9b78-4c0b-88b1-4928f311d376}</Project>
@@ -48,19 +41,12 @@
         <PackageReference Include="Moq" Version="4.18.0"/>
         <PackageReference Include="NUnit" Version="3.5.0"/>
     </ItemGroup>
-    
+
     <ItemGroup Condition="'$(Configuration)' == 'CI'">
-        <PackageReference Include="7dtd_nuget" Version="1.0.25" />
+        <PackageReference Include="7dtd_nuget" Version="1.0.25"/>
     </ItemGroup>
 
     <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
-        <Reference Include="mscorlib"/>
-        <Reference Include="System"/>
-        <Reference Include="System.ComponentModel.DataAnnotations"/>
-        <Reference Include="System.Configuration"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Xml"/>
         <Reference Include="0Harmony">
             <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
         </Reference>
@@ -83,7 +69,7 @@
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
         </Reference>
     </ItemGroup>
-    
+
     <ItemGroup>
         <Compile Include="Harmony\Factory.cs"/>
         <Compile Include="Harmony\GuiDrawCrosshairPatchTests.cs"/>
@@ -91,4 +77,6 @@
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+   
 </Project>

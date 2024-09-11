@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, "release/1.8.0-settings-without-gears" ]
+    branches: [ main ]
   pull_request:
     branches: [ main, "release/1.8.0-settings-without-gears" ]
 

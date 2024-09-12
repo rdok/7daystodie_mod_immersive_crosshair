@@ -5,17 +5,19 @@ namespace ImmersiveCrosshair.Harmony
 {
     public static class Services
     {
-        private static readonly Dictionary<Type, Delegate> Database =
-            new Dictionary<Type, Delegate>();
+        private static Dictionary<Type, Delegate> _database;
 
-        private static void Add<TService>(Func<object[], TService> provider)
-        {
-            Database[typeof(TService)] = provider;
-        }
+        private static void Add<TService>(Func<object[], TService> provider) =>
+            _database[typeof(TService)] = provider;
 
         public static TService Get<TService>(params object[] args)
         {
-            if (Database.TryGetValue(typeof(TService), out var provider))
+            if (_database == null)
+            {
+                throw new Exception("Services not initialized");
+            }
+
+            if (_database.TryGetValue(typeof(TService), out var provider))
             {
                 return ((Func<object[], TService>)provider)(args);
             }
@@ -25,12 +27,15 @@ namespace ImmersiveCrosshair.Harmony
 
         public static void Initialise()
         {
+            if (_database != null) return;
+
+            _database = new Dictionary<Type, Delegate>();
             var logger = new Logger();
             var settings = new Settings(logger);
 
-            Add<ILogger>(args => new Logger());
+            Add<ILogger>(args => logger);
             Add<IGuiDrawCrosshair>(args => new GuiDrawCrosshair(logger, settings));
-            Add<ISettings>(args => new Settings(logger));
+            Add<ISettings>(args => settings);
         }
     }
 }

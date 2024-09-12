@@ -41,7 +41,7 @@
         <PackageReference Include="Moq" Version="4.18.0"/>
         <PackageReference Include="NUnit" Version="3.5.0"/>
     </ItemGroup>
-
+ 
     <ItemGroup Condition="'$(Configuration)' == 'CI'">
         <PackageReference Include="7dtd_nuget" Version="1.0.25"/>
     </ItemGroup>
@@ -56,17 +56,17 @@
         <Reference Include="LogLibrary">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
         </Reference>
+        <Reference Include="System.Xml">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Xml.Linq">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.Linq.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
             <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Xml.Linq">
-            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.Linq.dll</HintPath>
-        </Reference>
-        <Reference Include="System.Xml">
-            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
         </Reference>
     </ItemGroup>
 

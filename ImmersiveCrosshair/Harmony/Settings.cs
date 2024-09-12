@@ -17,6 +17,7 @@ namespace ImmersiveCrosshair.Harmony
         public Settings(Logger logger)
         {
             _logger = logger;
+            _logger.Debug("Initialising settings.");
 
             MeleeWeaponsSetting = GetString("General", "ImmersiveCrosshair", "MeleeWeapons");
             BowsSetting = GetString("General", "ImmersiveCrosshair", "Bows");

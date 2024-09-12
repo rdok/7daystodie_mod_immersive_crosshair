@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 
-namespace UnitTests.Harmony;
+namespace UnitTests.Harmony.GuiDrawCrosshairPatch;
 
 [TestFixture]
 public class GuiDrawCrosshairPatchTests

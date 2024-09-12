@@ -17,31 +17,16 @@ namespace ImmersiveCrosshair.Harmony.Adapters
 
         public T GetComponentInChildren<T>()
         {
-            _logger.Debug("Loading Patch: Requesting component of type " + typeof(T).Name);
-
             if (typeof(T) != typeof(INGuiWdwInGameHUD))
             {
-                _logger.Debug(
-                    "Loading Patch: Type is not IGuiWdwInGameHUD, proceeding with generic component retrieval.");
                 var component = _localPlayerUI.GetComponentInChildren<T>();
-
-                _logger.Debug(component == null
-                    ? "Loading Patch: Component of type " + typeof(T).Name + " not found."
-                    : "Loading Patch: Component of type " + typeof(T).Name + " found.");
-
                 return component;
             }
 
-            _logger.Debug("Loading Patch: Type is IGuiWdwInGameHUD, attempting to retrieve NGuiWdwInGameHUD.");
             var nGuiComponent = _localPlayerUI.GetComponentInChildren<NGuiWdwInGameHUD>();
-
-            _logger.Debug(nGuiComponent == null
-                ? "Loading Patch: NGuiWdwInGameHUD component not found."
-                : "Loading Patch: NGuiWdwInGameHUD component found with type: " + nGuiComponent.GetType().Name);
 
             if (nGuiComponent != null)
             {
-                _logger.Debug("Loading Patch: Wrapping NGuiWdwInGameHUD with IGuiWdwInGameHUD interface.");
                 return (T)(object)new NInGuiWdwInGameHUDAdapter(nGuiComponent);
             }
 

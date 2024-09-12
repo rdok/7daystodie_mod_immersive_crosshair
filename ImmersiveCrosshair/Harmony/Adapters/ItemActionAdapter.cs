@@ -13,11 +13,32 @@ namespace ImmersiveCrosshair.Harmony.Adapters
             _itemAction = itemAction;
         }
 
-        bool IItemAction.IsTool =>
-            HasTags(_itemAction, new[] { "tool", "harvestingSkill", "knife", "perkBrawler" }, TagCheckType.Any);
+        bool IItemAction.IsTool
+        {
+            get
+            {
+                var isTool = HasTags(_itemAction, new[] { "tool", "harvestingSkill", "knife", "perkBrawler" },
+                    TagCheckType.Any);
 
-        bool IItemAction.IsMelee =>
-            HasTags(_itemAction, new[] { "meleeWeapon" }, TagCheckType.Any);
+                if (isTool) Logger.Debug("Detected holding a tool");
+
+                return isTool;
+            }
+        }
+
+        bool IItemAction.IsMelee
+        {
+            get
+            {
+                var isMelee = HasTags(
+                    _itemAction, new[] { "meleeWeapon" }, TagCheckType.Any
+                );
+
+                if (isMelee) Logger.Debug("Detected holding a melee weapon");
+
+                return isMelee;
+            }
+        }
 
         public bool IsBowWithNoSights => HasTags(_itemAction, new[] { "bow" }, TagCheckType.All) &&
                                          _itemAction?.item?.Name != "gunBowT3CompoundBow";
@@ -28,12 +49,10 @@ namespace ImmersiveCrosshair.Harmony.Adapters
 
             if (!_itemAction.item.Properties.Values.ContainsKey("Tags"))
             {
-                Logger.Debug("HasAnyTag: No tags in _itemAction.item.Properties.Values");
                 return false;
             }
 
             var tags = _itemAction.item.Properties.Values["Tags"];
-            Logger.Debug($"HasAnyTag: Item Tags: {tags}");
             var tagsArray = tags.Split(',');
             bool hasTags;
 

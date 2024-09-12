@@ -25,6 +25,8 @@
             var hud = playerUI.GetComponentInChildren<INGuiWdwInGameHUD>();
             if (hud == null) return;
 
+            _logger.Debug("GuiDrawCrosshair.Update: start");
+
             if (!entityPlayerLocal.bFirstPersonView)
             {
                 hud.showCrosshair = true;
@@ -39,6 +41,7 @@
 
             if (isInteractionPromptOpen)
             {
+                _logger.Debug("IntegrationPromptOpen: showing crosshair");
                 hud.showCrosshair = true;
                 return;
             }
@@ -67,6 +70,7 @@
                 return;
             }
 
+            _logger.Debug("Fallback to ranged weapons.");
             hud.showCrosshair = true;
         }
 
@@ -74,6 +78,8 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
+            _logger.Debug($"_settings.BowsSetting: {_settings.BowsSetting}");
+
             if (_settings.BowsSetting == "off")
             {
                 hud.showCrosshair = false;
@@ -93,6 +99,10 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
+            _logger.Debug(
+                $"_settings.MeleeWeaponsSetting: {_settings.MeleeWeaponsSetting}"
+            );
+
             if (_settings.MeleeWeaponsSetting == "off")
             {
                 hud.showCrosshair = false;
@@ -112,6 +122,8 @@
             IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
         )
         {
+            _logger.Debug($"_settings.ToolsSetting: {_settings.ToolsSetting}");
+
             if (_settings.ToolsSetting == "off")
             {
                 hud.showCrosshair = false;

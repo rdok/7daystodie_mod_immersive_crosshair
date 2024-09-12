@@ -71,9 +71,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="Harmony\Factory.cs"/>
-        <Compile Include="Harmony\GuiDrawCrosshairPatchTests.cs"/>
-        <Compile Include="Harmony\InteractionPromptTests.cs"/>
+        <Compile Include="Harmony\GuiDrawCrosshairPatch\Factory.cs" />
+        <Compile Include="Harmony\GuiDrawCrosshairPatch\GuiDrawCrosshairPatchTests.cs" />
+        <Compile Include="Harmony\GuiDrawCrosshairPatch\InteractionPromptTests.cs" />
+        <Compile Include="Harmony\GuiDrawCrosshairPatch\ToolsTest.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
 

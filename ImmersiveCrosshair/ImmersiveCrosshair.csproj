@@ -13,12 +13,12 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <ModName>ImmersiveCrosshair</ModName>
+        <ModName>ImmersiveCrosshair</ModName> 
         <ModVersion>1.8.0</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
         <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
-        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath>
+        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath> 
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>

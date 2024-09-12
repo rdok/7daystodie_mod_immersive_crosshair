@@ -33,13 +33,7 @@ namespace ImmersiveCrosshair.Harmony
         Collider hitCollider { get; set; }
     }
 
-    public interface IItemAction
-    {
-        bool IsTool { get; }
-        bool IsMelee { get; }
-        bool HasBowWithNoSights { get; }
-    }
-    
+
     public interface IItemClass
     {
         IItemAction[] Actions { get; }
@@ -50,7 +44,7 @@ namespace ImmersiveCrosshair.Harmony
         IItemClass ItemClass { get; }
     }
 
-    public interface IGuiWdwInGameHUD
+    public interface INGuiWdwInGameHUD
     {
         bool showCrosshair { get; set; }
     }
@@ -58,5 +52,12 @@ namespace ImmersiveCrosshair.Harmony
     public interface IHitInfoDetails
     {
         float distanceSq { get; }
+    }
+
+    public interface IItemAction
+    {
+        bool IsTool { get; }
+        bool IsMelee { get; }
+        bool IsBowWithNoSights { get; }
     }
 }

@@ -13,17 +13,19 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <ModName>ImmersiveCrosshair</ModName>
-        <ModVersion>1.7.0</ModVersion>
+        <ModName>ImmersiveCrosshair</ModName> 
+        <ModVersion>1.8.0</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
+        <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
+        <ModsPath>..\..\..\..\vortex_udf_7_days_to_die\Mods</ModsPath> 
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\..\..\..\vortex_udf_7_days_to_die\Mods\ZZZZ_ImmersiveCrosshair</OutputPath>
+        <OutputPath>$(ModsPath)\ZZZZ_ImmersiveCrosshair</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -38,19 +40,16 @@
         <WarningLevel>3</WarningLevel>
         <AbsoluteOutputPath>$(MSBuildProjectDirectory)\$(OutputPath)</AbsoluteOutputPath>
     </PropertyGroup>
+    
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CI|AnyCPU' ">
+      <OutputPath>bin\CI\</OutputPath>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <Compile Include="Harmony\Init.cs"/>
-        <Compile Include="Harmony\Interfaces.cs"/>
-        <Compile Include="Harmony\ImmersiveCrosshair.cs"/>
-        <Compile Include="Harmony\Interfaces\IGUIWindowManager.cs"/>
-        <Compile Include="Harmony\Logger.cs"/>
-        <Compile Include="Harmony\Seams\IGUIWindowManagerSeam.cs"/>
-        <Compile Include="Harmony\Wrappers.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="GearsAPI.dll"/>  
+        <Content Include="GearsAPI.dll" />
+        <Reference Include="GearsAPI">
+            <HintPath>GearsAPI.dll</HintPath>
+        </Reference>
         <Content Include="Config\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -60,50 +59,92 @@
         <Content Include="ModSettings.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Compile Include="Harmony\Adapters\EntityPlayerLocalAdapter.cs" />
+        <Compile Include="Harmony\Adapters\HitInfoDetailsAdapter.cs" />
+        <Compile Include="Harmony\Adapters\IGUIWindowManager.cs" />
+        <Compile Include="Harmony\Adapters\IGUIWindowManagerSeam.cs" />
+        <Compile Include="Harmony\Adapters\Interfaces.cs" />
+        <Compile Include="Harmony\Adapters\NInGuiWdwInGameHUDAdapter.cs" />
+        <Compile Include="Harmony\Adapters\InventoryAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemActionAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemClassAdapter.cs" />
+        <Compile Include="Harmony\Adapters\ItemValueAdapter.cs" />
+        <Compile Include="Harmony\Adapters\LocalPlayerUIAdapter.cs" />
+        <Compile Include="Harmony\Adapters\WorldHitInfoAdapter.cs" />
+        <Compile Include="Harmony\IGuiDrawCrosshair.cs" />
+        <Compile Include="Harmony\ILogger.cs" />
+        <Compile Include="Harmony\ISettings.cs" />
+        <Compile Include="Harmony\ItemActionRangedPatch.cs" />
+        <Compile Include="Harmony\Main.cs" />
+        <Compile Include="Harmony\GuiDrawCrosshair.cs" />
+        <Compile Include="Harmony\ItemActionDynamicPatch.cs" />
+        <Compile Include="Harmony\Logger.cs" />
+        <Compile Include="Harmony\Settings.cs" />
+        <Compile Include="Harmony\Services.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
 
-    <ItemGroup>
+
+    <ItemGroup Condition=" '$(Configuration)' != 'CI' ">
         <Reference Include="0Harmony">
-            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
+            <HintPath>$(GamePath)\Mods\0_TFP_Harmony\0Harmony.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="Assembly-CSharp">
-            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Assembly-CSharp.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="GearsAPI">
-            <HintPath>GearsAPI.dll</HintPath>
-        </Reference>
         <Reference Include="LogLibrary">
-            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\LogLibrary.dll</HintPath>
             <Private>False</Private>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">  
-            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
             <Private>False</Private> 
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
-            <HintPath>..\..\..\..\Steam\steamapps\common\7 Days To Die\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml.Linq">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.Linq.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="System.Xml">
+            <HintPath>$(GamePath)\7DaysToDie_Data\Managed\Managed\System.Xml.dll</HintPath>
             <Private>False</Private>
         </Reference>
     </ItemGroup>
+    
+    <ItemGroup Condition="'$(Configuration)' == 'CI'">
+        <PackageReference Include="7dtd_nuget" Version="1.0.25"/>
+    </ItemGroup>
+    
+    <Target Name="BeforeBuild">
+        <RemoveDir Directories="$(OutputPath)"/>
+    </Target>
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 
-    <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release'">
+    <Target Name="AfterBuild" Condition=" '$(Configuration)' != 'CI' ">
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Name/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/DisplayName/@value" Value="$(ModName)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Author/@value" Value="Rizarttt"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Description/@value" Value="$(ModDescription)"/>
         <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Version/@value" Value="$(ModVersion)"/>
-        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value" Value="https://www.nexusmods.com/7daystodie/mods/5601"/>
+        <XmlPoke XmlInputPath="$(OutputPath)\ModInfo.xml" Query="/xml/Website/@value"
+                 Value="https://www.nexusmods.com/7daystodie/mods/$(ModId)"/>
 
         <Exec
-                Condition=" '$(Configuration)' != 'Debug' "
+                Condition=" '$(Configuration)' == 'Release' "
+                Command="npm run generate_readme"
+                WorkingDirectory="$(MSBuildProjectDirectory)\.."
+        />
+        <Exec
+                Condition=" '$(Configuration)' == 'Release' "
                 Command="npm run build --prefix -- $(AbsoluteOutputPath) $(ModName) $(ModVersion)"
                 WorkingDirectory="$(MSBuildProjectDirectory)\.."
         />
-        <Exec Command="npm run generate_readme" WorkingDirectory="$(MSBuildProjectDirectory)\.."/>
 
     </Target>
 

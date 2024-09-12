@@ -1,6 +1,6 @@
 [size=6]7 Days to Die Mod - Immersive Crosshair[/size]
 
-[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/5601][img]https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7daystodie_mod_immersive_crosshair][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url]
+[url=https://next.nexusmods.com/7daystodie/collections/epfqzi][img]https://img.shields.io/badge/Nexus%20Mods%20Collection-Immersive%20HUD%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://www.nexusmods.com/7daystodie/mods/5601][img]https://img.shields.io/badge/Nexus%20Mod-Immersive%20Crosshair%20-orange?style=flat-square&logo=spinrilla[/img][/url] [url=https://github.com/rdok/7daystodie_mod_immersive_crosshair][img]https://img.shields.io/badge/GitHub-Repository-green?style=flat-square&logo=github[/img][/url] [url=https://github.com/rdok/7dtd_immersive_crosshair/actions/workflows/ci.yml][img]https://img.shields.io/github/actions/workflow/status/rdok/7dtd_immersive_crosshair/ci.yml?branch=main&label=CI&logo=github&logoColor=white&style=flat-square[/img][/url]
 
 [quote]
 [b]Immersive Crosshair:[/b] Crosshair when you need. Hide when you don't.  
@@ -8,17 +8,30 @@
 [/quote]
 [url=https://www.nexusmods.com/7daystodie/mods/5601][img]https://github.com/rdok/7daystodie_mod_immersive_crosshair/blob/main/documentation/showcase.gif?raw=true[/img][/url]
 
+[size=5]Installation[/size]
+[list]
+[*] [b]Game Version:[/b] Works with version 1.0 of the game.
+[*] [b]Install with Vortex:[/b] Use the [url=https://www.nexusmods.com/about/vortex/]Vortex Mod Manager[/url] to install the mod easily.
+[*] [b]Optional Customization:[/b]
+[list]
+[*] For more in-game options, you can install the [url=https://www.nexusmods.com/7daystodie/mods/4017]Gears[/url] and [url=https://www.nexusmods.com/7daystodie/mods/2409/]Quartz[/url] mods.
+[*] You can also customize the mod manually by editing the [b]ModSettings.xml[/b] file.
+[/list][/list]
+
+
 [size=5]Features[/size]
 [list]
-[*] Shows crosshair only when holding a tool/hands and hovering crosshair close to any interactable object.
-[*] Shows crosshair having the interaction prompted opened (interact with cars/doors/etc...), regardless of equipped tool or weapon.
-[*] Gears mod settings integration supported. In game options to optionally enable crosshair when:
+[*] The crosshair appears only when needed:
 [list]
-[*] wielding any bow with no sights.   
-[*] wielding any tool or using hands only.
-[*] wielding any melee weapon.
-[*] Requires [url=https://www.nexusmods.com/7daystodie/mods/4017]Gears[/url] &  [url=https://www.nexusmods.com/7daystodie/mods/2409/]Quartz[/url]
-[*] For an example visit the [url=https://www.nexusmods.com/7daystodie/mods/5601?tab=videos#lg=2&slide=0]Videos tab[/url].[/list]
-[*] This mod has been designed to optionally work with [url=https://www.nexusmods.com/7daystodie/mods/5640]Dot Crosshair[/url]
-[*] Game Version: 1.0. Install with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
+[*] It shows up when you're holding a tool, using your hands, or hovering over an interactable object.
+[*] It automatically appears when an interaction prompt is available (like opening doors or interacting with cars), no matter what you have equipped.[/list]
+[*] You can customize how the crosshair behaves in different situations:
+[list]
+[*] [b]Bows (no sights):[/b] Choose between turning the crosshair off or having it stay on.
+[*] [b]Tools and hands:[/b] Choose to have the crosshair off, on only when needed, or always on.
+[*] [b]Melee weapons:[/b] Choose to turn the crosshair off, have it appear dynamically, or keep it on all the time.
+[*] [b]Ranged weapons:[/b] You can turn the crosshair off or keep it on.[/list]
+[*] The mod uses the game's built-in system to detect how close you are to objects, ensuring the crosshair behaves accurately.
+[*] It's also compatible with the [url=https://www.nexusmods.com/7daystodie/mods/5640]Dot Crosshair[/url] mod if you want a simpler crosshair option.
+[*] [url=https://www.nexusmods.com/7daystodie/mods/5601?tab=videos#lg=2&slide=0]See the mod in action on the Videos tab[/url].
 [/list]

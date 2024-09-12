@@ -8,7 +8,6 @@ if (args.length < 2) {
     process.exit(1);
 }
 
-console.debug(args);
 const absoluteOutputPath = args[0];
 const newModName = args[1];
 const newVersion = args[2];
@@ -19,6 +18,11 @@ const buildDir = join(distDir, newModName);
 
 try {
     unlinkSync(artifact);
+} catch (e) {
+    // Expected behavior if it doesn't exist.
+}
+
+try {
     rmSync(distDir, {recursive: true});
 } catch (e) {
     // Expected behavior if it doesn't exist.

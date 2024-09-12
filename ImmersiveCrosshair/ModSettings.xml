@@ -3,30 +3,38 @@
     <Global>
         <Tab name="General">
             <Category name="ImmersiveCrosshair" displayKey="immersiveCrosshairDisplayKey">
-                <Switch
-                        name="EnabledForBowsWithNoSights"
-                        displayKey="enabledForBowsWithNoSightsDisplayKey"
-                        tooltipKey="enabledForBowsWithNoSightsToolTipKey"
-                        defaultValue="false"
-                        leftValue="false"
-                        rightValue="true"
-                />
-                <Switch
-                        name="EnabledForTools"
-                        displayKey="enabledToolsDisplayKey"
-                        tooltipKey="enabledForToolsToolTipKey"
-                        defaultValue="false"
-                        leftValue="false"
-                        rightValue="true"
-                />
-                <Switch
-                        name="EnabledForMeleeWeapons"
-                        displayKey="enabledForMeleeDisplayKey"
-                        tooltipKey="enabledForMeleeToolTipKey"
-                        defaultValue="false"
-                        leftValue="false"
-                        rightValue="true"
-                />
+                <Selector
+                        name="Tools"
+                        displayKey="toolDisplayKey"
+                        tooltipKey="toolTooltipKey"
+                        defaultValue="dynamic"
+                >
+                    <Property type="arrayValues" allowedValues="off,static,dynamic"/>
+                </Selector>
+                <Selector
+                        name="MeleeWeapons"
+                        displayKey="meleeWeaponsDisplayKey"
+                        tooltipKey="meleeWeaponsTooltipKey"
+                        defaultValue="static"
+                >
+                    <Property type="arrayValues" allowedValues="off,static,dynamic"/>
+                </Selector>
+                <Selector
+                        name="Bows"
+                        displayKey="bowsDisplayKey"
+                        defaultValue="static"
+                        tooltipKey="bowsTooltipKey"
+                >
+                    <Property type="arrayValues" allowedValues="off,static"/>
+                </Selector>
+                <Selector
+                        name="RangedWeapons"
+                        displayKey="rangedWeaponsDisplayKey"
+                        defaultValue="off"
+                        tooltipKey="rangedWeaponsTooltipKey"
+                >
+                    <Property type="arrayValues" allowedValues="off,static"/>
+                </Selector>
             </Category>
         </Tab>
     </Global>

@@ -30,15 +30,28 @@ namespace ImmersiveCrosshair.Harmony
 
             var toolsSetting = category.GetSetting("Tools");
             toolsSetting.OnSettingChanged += ToolsSettingChanged;
+            ToolsSettingChanged(
+                toolsSetting, (toolsSetting as IGlobalValueSetting)?.CurrentValue
+            );
 
             var meleeWeapons = category.GetSetting("MeleeWeapons");
             meleeWeapons.OnSettingChanged += MeleeWeaponsSettingChanged;
+            MeleeWeaponsSettingChanged(
+                meleeWeapons, (meleeWeapons as IGlobalValueSetting)?.CurrentValue
+            );
 
             var bowsSetting = category.GetSetting("Bows");
             bowsSetting.OnSettingChanged += BowsSettingChanged;
+            BowsSettingChanged(
+                bowsSetting, (bowsSetting as IGlobalValueSetting)?.CurrentValue
+            );
 
             var rangedWeaponsSetting = category.GetSetting("RangedWeapons");
             rangedWeaponsSetting.OnSettingChanged += RangedWeaponsSettingChanged;
+            RangedWeaponsSettingChanged(
+                rangedWeaponsSetting,
+                (rangedWeaponsSetting as IGlobalValueSetting)?.CurrentValue
+            );
         }
 
         public void OnWorldSettingsLoaded(IModWorldSettings worldSettings)

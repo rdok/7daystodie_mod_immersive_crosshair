@@ -12,10 +12,7 @@ namespace ImmersiveCrosshair.Harmony
 
         public static TService Get<TService>(params object[] args)
         {
-            if (_database == null)
-            {
-                throw new Exception("Services not initialized");
-            }
+            if (_database == null) Initialise();
 
             if (_database.TryGetValue(typeof(TService), out var provider))
             {
@@ -25,7 +22,7 @@ namespace ImmersiveCrosshair.Harmony
             throw new Exception($"Service {typeof(TService)} not registered");
         }
 
-        public static void Initialise()
+        private static void Initialise()
         {
             if (_database != null) return;
 

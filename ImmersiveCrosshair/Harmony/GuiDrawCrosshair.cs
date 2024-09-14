@@ -19,7 +19,6 @@
         {
             if (entityPlayerLocal == null) return;
             if (itemAction == null) return;
-            if (worldRayHitInfo == null) return;
 
             var playerUI = entityPlayerLocal.playerUI;
             var hud = playerUI.GetComponentInChildren<INGuiWdwInGameHUD>();
@@ -46,6 +45,14 @@
                 return;
             }
 
+            if (itemAction.IsBowWithNoSights)
+            {
+                DrawBowCrosshair(hud);
+                return;
+            }
+
+            if (worldRayHitInfo == null) return;
+
             if (itemAction.IsTool)
             {
                 DrawToolCrosshair(worldRayHitInfo, hud);
@@ -55,12 +62,6 @@
             if (itemAction.IsMelee)
             {
                 DrawMeleeCrosshair(worldRayHitInfo, hud);
-                return;
-            }
-
-            if (itemAction.IsBowWithNoSights)
-            {
-                DrawBowCrosshair(worldRayHitInfo, hud);
                 return;
             }
 
@@ -74,9 +75,7 @@
             hud.showCrosshair = true;
         }
 
-        private void DrawBowCrosshair(
-            IWorldRayHitInfo worldRayHitInfo, INGuiWdwInGameHUD hud
-        )
+        private void DrawBowCrosshair(INGuiWdwInGameHUD hud)
         {
             _logger.Debug($"_settings.BowsSetting: {_settings.BowsSetting}");
 
@@ -89,10 +88,7 @@
             if (_settings.BowsSetting == "static")
             {
                 hud.showCrosshair = true;
-                return;
             }
-
-            hud.showCrosshair = worldRayHitInfo.bHitValid;
         }
 
         private void DrawMeleeCrosshair(

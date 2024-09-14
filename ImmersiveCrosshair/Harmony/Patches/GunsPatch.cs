@@ -1,11 +1,10 @@
 using HarmonyLib;
-using System.Reflection;
 using ImmersiveCrosshair.Harmony.Adapters;
 
-namespace ImmersiveCrosshair.Harmony
+namespace ImmersiveCrosshair.Harmony.Patches
 {
     [HarmonyPatch(typeof(ItemActionRanged), nameof(ItemActionRanged.GetExecuteActionTarget))]
-    public static class ItemActionRangedPatch
+    public static class GunsPatch
     {
         private static readonly IGuiDrawCrosshair GUIDrawCrosshair =
             Services.Get<IGuiDrawCrosshair>();

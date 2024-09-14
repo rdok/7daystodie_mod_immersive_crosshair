@@ -1,11 +1,10 @@
 using HarmonyLib;
-using System.Linq;
 using ImmersiveCrosshair.Harmony.Adapters;
 
-namespace ImmersiveCrosshair.Harmony
+namespace ImmersiveCrosshair.Harmony.Patches
 {
     [HarmonyPatch(typeof(ItemActionDynamic), nameof(ItemActionDynamic.GetExecuteActionTarget))]
-    public static class ItemActionDynamicPatch
+    public static class ToolsPatch
     {
         private static readonly IGuiDrawCrosshair GUIDrawCrosshair =
             Services.Get<IGuiDrawCrosshair>();

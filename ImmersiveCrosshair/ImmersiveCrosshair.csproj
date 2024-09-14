@@ -14,7 +14,7 @@
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <ModName>ImmersiveCrosshair</ModName> 
-        <ModVersion>1.8.0</ModVersion>
+        <ModVersion>1.8.1</ModVersion>
         <ModDescription>Show crosshair when you need it. Hide it when you do not.</ModDescription>
         <ModId>5601</ModId>
         <GamePath>..\..\..\..\Steam\steamapps\common\7 Days To Die</GamePath>
@@ -74,11 +74,12 @@
         <Compile Include="Harmony\IGuiDrawCrosshair.cs" />
         <Compile Include="Harmony\ILogger.cs" />
         <Compile Include="Harmony\ISettings.cs" />
-        <Compile Include="Harmony\ItemActionRangedPatch.cs" />
         <Compile Include="Harmony\Main.cs" />
         <Compile Include="Harmony\GuiDrawCrosshair.cs" />
-        <Compile Include="Harmony\ItemActionDynamicPatch.cs" />
+        <Compile Include="Harmony\Patches\BowsPatch.cs" />
+        <Compile Include="Harmony\Patches\GunsPatch.cs" />
         <Compile Include="Harmony\Logger.cs" />
+        <Compile Include="Harmony\Patches\ToolsPatch.cs" />
         <Compile Include="Harmony\Settings.cs" />
         <Compile Include="Harmony\Services.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

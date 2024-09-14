@@ -13,7 +13,6 @@ namespace ImmersiveCrosshair.Harmony
 
         public Main()
         {
-            Services.Initialise();
             _settings = Services.Get<ISettings>();
             _logger = Services.Get<ILogger>();
         }

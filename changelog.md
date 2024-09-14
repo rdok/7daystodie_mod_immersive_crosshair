@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.8.2 - 14 Aug 2024
+- fix: Handle holding items event not referenced to player leading to occasional errors.
+ 
 #### 1.8.1 - 14 Aug 2024
 - fix: Missing bow crosshair event.
 

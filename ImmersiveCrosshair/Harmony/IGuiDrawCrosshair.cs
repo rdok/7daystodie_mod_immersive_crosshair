@@ -5,7 +5,7 @@ namespace ImmersiveCrosshair.Harmony
         void Update(
             IEntityPlayerLocal entityPlayerLocal,
             IItemAction itemAction,
-            IWorldRayHitInfo worldRayHitInfo
+            IWorldRayHitInfo worldRayHitInfo = null
         );
     }
 }

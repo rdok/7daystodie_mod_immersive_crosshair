@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.8.1 - 14 Aug 2024
+- fix: Missing bow crosshair event.
+
 #### 1.8.0 - 11 Aug 2024
 
 - feat: Mod can now be customized using `ModSettings.xml` for users that are unable to use [Gears](https://www.nexusmods.com/7daystodie/mods/4017) & [Quartz](https://www.nexusmods.com/7daystodie/mods/2409/).

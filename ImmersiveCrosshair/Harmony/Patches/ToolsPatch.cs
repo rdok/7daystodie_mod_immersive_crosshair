@@ -16,9 +16,11 @@ namespace ImmersiveCrosshair.Harmony.Patches
         )
         {
             if (__result == null) return;
+            var entityPlayerLocal = _actionData.invData.holdingEntity;
+            if (entityPlayerLocal == null) return;
 
             var player = new EntityPlayerLocalAdapter(
-                _actionData.invData.holdingEntity as EntityPlayerLocal
+                entityPlayerLocal as EntityPlayerLocal
             );
 
             var itemAction = new ItemActionAdapter(__instance);

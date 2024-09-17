@@ -17,12 +17,11 @@ namespace ImmersiveCrosshair.Harmony.Patches
         {
             if (__result == null) return;
 
-            var entityPlayerLocal = _actionData.invData.holdingEntity;
+            var entityPlayerLocal = _actionData.invData.holdingEntity
+                as EntityPlayerLocal;
             if (entityPlayerLocal == null) return;
 
-            var player = new EntityPlayerLocalAdapter(
-                entityPlayerLocal as EntityPlayerLocal
-            );
+            var player = new EntityPlayerLocalAdapter(entityPlayerLocal);
 
             var itemAction = new ItemActionAdapter(__instance);
             var worldRayHitInfo = new WorldHitInfoAdapter(__result);

@@ -16,14 +16,11 @@ namespace ImmersiveCrosshair.Harmony.Patches
             ItemActionData _actionData
         )
         {
-            Logger.Debug("ItemActionCatapult Prefix");
-            
-            var entityPlayerLocal = _actionData.invData.holdingEntity;
+            var entityPlayerLocal = _actionData.invData.holdingEntity
+                as EntityPlayerLocal;
             if (entityPlayerLocal == null) return;
 
-            var player = new EntityPlayerLocalAdapter(
-                _actionData.invData.holdingEntity as EntityPlayerLocal
-            );
+            var player = new EntityPlayerLocalAdapter(entityPlayerLocal);
 
             var itemAction = new ItemActionAdapter(__instance);
 

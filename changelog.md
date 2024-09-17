@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.8.3 - 14 Aug 2024
+- fix: Resolved an issue where item-holding events were not properly associated with the player, causing occasional errors.
+
 #### 1.8.2 - 14 Aug 2024
 - fix: Handle holding items event not referenced to player leading to occasional errors.
  
